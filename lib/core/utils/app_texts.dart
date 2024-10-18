@@ -1,12 +1,18 @@
 class AppTexts {
   static const String onboardingText1 = "موزع معتمد";
   static const String skip = "تخطى";
+  static const String addPhoto = "اضف صورة شخصية";
+  static const String updatePhoto = "تعديل الصورة";
   static const String onboardingText2 = "طلباتك كلها عندنا";
   static const String onboardingTitleButton1And2 = "التالي";
   static const String errorEmail = "من فضلك ادخل البريد الألكتروني";
   static const String errorPassword = "من فضلك ادخل كلمة المرور";
+  static const String errorName = "من فضلك ادخل الأسم";
+  static const String errorPhone = "من فضلك ادخل رقم الهاتف";
   static const String createAnAccount = "قم بإنشاء حساب";
+  static const String signUpAccount = "قم بتسجيل الدخول";
   static const String dontHaveAnAccount = "ليس لديك حساب؟";
+  static const String haveAccount = "لديك حساب؟";
   static const String signUp = "انشاء الحساب";
   static const String login = "تسجيل الدخول";
   static const String textLabelPhone = "ادخل رقم الهاتف";

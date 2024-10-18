@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/core/shared_widgets/custom_appbar.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/shared_widgets/custom_field.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/sign_up/presentation/views/sign_up_screen.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
@@ -35,16 +36,7 @@ class _LoginBodyState extends State<LoginBody> {
       ),
       child: Column(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Image.asset(
-            AppImages.splashImage,
-            width: MediaQuery.of(context).size.width * 0.4,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.04,
-          ),
+          const CustomAppbar(),
           Expanded(
             child: Container(
               width: double.infinity,
@@ -62,6 +54,7 @@ class _LoginBodyState extends State<LoginBody> {
               child: ListView(
                 children: [
                   Form(
+                    key: formKey,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: MediaQuery.of(context).size.width * 0.035,
@@ -105,9 +98,12 @@ class _LoginBodyState extends State<LoginBody> {
                           CustomButton(
                             titleButton: AppTexts.login,
                             onTap: () {
-                              FocusScope.of(context).requestFocus(
-                                FocusNode(),
-                              );
+                              if (formKey.currentState!.validate()) {
+                                FocusScope.of(context).requestFocus(
+                                  FocusNode(),
+                                );
+                                print("object");
+                              }
                             },
                           ),
                           SizedBox(
@@ -117,15 +113,23 @@ class _LoginBodyState extends State<LoginBody> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const SignUpScreen();
+                                      },
+                                    ),
+                                  );
+                                },
                                 child: Text(
                                   AppTexts.createAnAccount,
                                   style: GoogleFonts.almarai(
                                     textStyle: TextStyle(
                                       color: AppColors.dontHaveAnAccount,
                                       fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              0.018,
+                                      MediaQuery.of(context).size.height * 0.018,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -137,8 +141,7 @@ class _LoginBodyState extends State<LoginBody> {
                                   textStyle: TextStyle(
                                     color: AppColors.dontHaveAnAccount,
                                     fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.018,
+                                    MediaQuery.of(context).size.height * 0.018,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),

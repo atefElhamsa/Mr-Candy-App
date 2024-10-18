@@ -30,7 +30,7 @@ class CustomField extends StatelessWidget {
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) {
-        FocusManager.instance.primaryFocus!.unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
       },
       keyboardType: keyboardType,
       decoration: InputDecoration(
