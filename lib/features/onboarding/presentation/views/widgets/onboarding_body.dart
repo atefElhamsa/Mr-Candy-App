@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/login/presentation/views/login_screen.dart';
 import 'package:mr_candy/features/onboarding/presentation/data/model/onboarding_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -96,14 +98,15 @@ class _OnboardingBodyState extends State<OnboardingBody> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
-            GestureDetector(
+            CustomButton(
+              titleButton: onboardings[index].titleButton,
               onTap: () {
                 if (index == onboardings.length - 1) {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const Text("data");
+                        return const LoginScreen();
                       },
                     ),
                   );
@@ -115,38 +118,6 @@ class _OnboardingBodyState extends State<OnboardingBody> {
                   );
                 }
               },
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.05,
-                width: MediaQuery.of(context).size.width * 0.3,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      AppColors.buttonColor1,
-                      AppColors.buttonColor2,
-                      AppColors.buttonColor3,
-                      AppColors.buttonColor2,
-                    ],
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      MediaQuery.of(context).size.width * 0.02,
-                    ),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    onboardings[index].titleButton,
-                    style: GoogleFonts.almarai(
-                      textStyle: TextStyle(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: MediaQuery.of(context).size.height * 0.025),
-                    ),
-                  ),
-                ),
-              ),
             ),
           ],
         );

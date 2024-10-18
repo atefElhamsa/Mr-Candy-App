@@ -9,5 +9,11 @@ class AppColors {
   static const Color buttonColor2 = Color(0XFF731BCD);
   static const Color indicator = Color(0XFF6B1ECD);
   static const Color buttonColor3 = Color(0XFF2F33CD);
+  static const Color loginAppbar1 = Color(0XFF8515CD);
+  static const Color loginAppbar2 = Color(0XFF701CCD);
+  static const Color loginAppbar3 = Color(0XFF5028CD);
   static const Color white = Colors.white;
+  static const Color red = Colors.red;
+  static const Color iconsFormFieldColor = Color(0XFF5E22CD);
+  static const Color dontHaveAnAccount = Color(0XFF626262);
 }
