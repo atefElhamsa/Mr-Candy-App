@@ -1,5 +1,6 @@
 class AppTexts {
   static const String onboardingText1 = "موزع معتمد";
+  static const String loginSuccess = "تم تسجيل الدخول بنجاح";
   static const String skip = "تخطى";
   static const String addPhoto = "اضف صورة شخصية";
   static const String updatePhoto = "تعديل الصورة";
@@ -21,6 +22,8 @@ class AppTexts {
   static const String textLabelEmail = "ادخل البريد الألكتروني";
   static const String onboardingTitleButton3 = "ابدأ";
   static const String onboardingText3 = "اطلب حاجتك بكل سهولة";
+  static const String noInternet = "No Internet";
+  static const String errorOccurred = "Error Occurred";
   static const String descriptionOnboarding =
       "هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى \nالمقروء لصفحة ما سيلهي القارئ عن التركيز على ";
 }

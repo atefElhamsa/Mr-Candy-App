@@ -7,6 +7,6 @@ class ApiFailure extends Failure {
   ApiFailure({required super.message});
 }
 
-class ImageFailure extends Failure {
-  ImageFailure({required super.message});
+class NoInternetFailure extends Failure {
+  NoInternetFailure({required super.message});
 }

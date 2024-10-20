@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/custom_appbar.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/shared_widgets/custom_field.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/login/presentation/controller/login_cubit.dart';
+import 'package:mr_candy/features/login/presentation/controller/login_states.dart';
 import 'package:mr_candy/features/sign_up/presentation/views/sign_up_screen.dart';
 
 class LoginBody extends StatefulWidget {
@@ -95,15 +98,49 @@ class _LoginBodyState extends State<LoginBody> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          CustomButton(
-                            titleButton: AppTexts.login,
-                            onTap: () {
-                              if (formKey.currentState!.validate()) {
-                                FocusScope.of(context).requestFocus(
-                                  FocusNode(),
+                          BlocConsumer<LoginCubit,LoginStates>(
+                            listener: (context, state) {
+                              if (state is LoginFailureStates) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(state.errorMessage),
+                                    backgroundColor: AppColors.red,
+                                    behavior: SnackBarBehavior.floating,
+                                    showCloseIcon: true,
+                                  ),
                                 );
-                                print("object");
+                              } else if (state is LoginSuccessStates) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(AppTexts.loginSuccess),
+                                    backgroundColor: AppColors.green,
+                                    behavior: SnackBarBehavior.floating,
+                                    showCloseIcon: true,
+                                  ),
+                                );
                               }
+                            },
+                            builder: (context, state) {
+                              return state is LoginLoadingStates
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : CustomButton(
+                                      titleButton: AppTexts.login,
+                                      onTap: () {
+                                        if (formKey.currentState!.validate()) {
+                                          FocusScope.of(context).requestFocus(
+                                            FocusNode(),
+                                          );
+                                          BlocProvider.of<LoginCubit>(context)
+                                              .login(
+                                            email: emailController.text.trim(),
+                                            password:
+                                                passwordController.text.trim(),
+                                          );
+                                        }
+                                      },
+                                    );
                             },
                           ),
                           SizedBox(
@@ -129,7 +166,8 @@ class _LoginBodyState extends State<LoginBody> {
                                     textStyle: TextStyle(
                                       color: AppColors.dontHaveAnAccount,
                                       fontSize:
-                                      MediaQuery.of(context).size.height * 0.018,
+                                          MediaQuery.of(context).size.height *
+                                              0.018,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -141,7 +179,8 @@ class _LoginBodyState extends State<LoginBody> {
                                   textStyle: TextStyle(
                                     color: AppColors.dontHaveAnAccount,
                                     fontSize:
-                                    MediaQuery.of(context).size.height * 0.018,
+                                        MediaQuery.of(context).size.height *
+                                            0.018,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
