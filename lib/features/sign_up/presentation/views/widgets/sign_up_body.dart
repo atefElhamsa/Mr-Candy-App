@@ -1,12 +1,15 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mr_candy/core/shared_widgets/custom_appbar.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/shared_widgets/custom_field.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/sign_up/data/models/sign_up_model.dart';
+import 'package:mr_candy/features/sign_up/presentation/controller/sign_up_cubit.dart';
+import 'package:mr_candy/features/sign_up/presentation/controller/sign_up_states.dart';
 
 class SignUpBody extends StatefulWidget {
   const SignUpBody({super.key});
@@ -24,12 +27,6 @@ class _SignUpBodyState extends State<SignUpBody> {
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
-  final ImagePicker picker = ImagePicker();
-  XFile? image;
-  pickImage() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,62 +70,89 @@ class _SignUpBodyState extends State<SignUpBody> {
                       ),
                       child: Column(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              pickImage();
-                            },
-                            child: CircleAvatar(
-                              radius: MediaQuery.of(context).size.width * 0.2,
-                              backgroundColor: AppColors.transparent,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.18,
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    MediaQuery.of(context).size.width * 0.24,
-                                  ),
-                                  border: Border.all(
-                                    color: AppColors.iconsFormFieldColor,
+                          BlocBuilder<SignUpCubit, SignUpStates>(
+                            builder: (context, state) {
+                              return GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<SignUpCubit>(context)
+                                      .pickImageProfile();
+                                },
+                                child: CircleAvatar(
+                                  radius:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  backgroundColor: AppColors.transparent,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.18,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        MediaQuery.of(context).size.width *
+                                            0.24,
+                                      ),
+                                      border: Border.all(
+                                        color: AppColors.iconsFormFieldColor,
+                                      ),
+                                    ),
+                                    child: BlocProvider.of<SignUpCubit>(context)
+                                                .image ==
+                                            null
+                                        ? Icon(
+                                            Icons.add_a_photo,
+                                            color:
+                                                AppColors.iconsFormFieldColor,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.05,
+                                          )
+                                        : ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.23,
+                                            ),
+                                            child: Image.file(
+                                              File(
+                                                BlocProvider.of<SignUpCubit>(
+                                                        context)
+                                                    .image!
+                                                    .path,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                   ),
                                 ),
-                                child: image == null
-                                    ? Icon(
-                                        Icons.add_a_photo,
-                                        color: AppColors.iconsFormFieldColor,
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.05,
-                                      )
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          MediaQuery.of(context).size.width *
-                                              0.23,
-                                        ),
-                                        child: Image.file(
-                                          File(
-                                            image!.path,
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              pickImage();
+                              );
                             },
-                            child: Text(
-                              image == null ? AppTexts.addPhoto : AppTexts.updatePhoto,
-                              style: GoogleFonts.almarai(
-                                textStyle: TextStyle(
-                                  color: AppColors.iconsFormFieldColor,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: MediaQuery.of(context).size.height * 0.02,
-                                )
-                              ),
-                            ),
+                          ),
+                          BlocBuilder<SignUpCubit, SignUpStates>(
+                            builder: (context, state) {
+                              return TextButton(
+                                onPressed: () {
+                                  BlocProvider.of<SignUpCubit>(context)
+                                      .pickImageProfile();
+                                },
+                                child: Text(
+                                  BlocProvider.of<SignUpCubit>(context).image ==
+                                          null
+                                      ? AppTexts.addPhoto
+                                      : AppTexts.updatePhoto,
+                                  style: GoogleFonts.almarai(
+                                    textStyle: TextStyle(
+                                      color: AppColors.iconsFormFieldColor,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03,
@@ -196,14 +220,64 @@ class _SignUpBodyState extends State<SignUpBody> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          CustomButton(
-                            titleButton: AppTexts.signUp,
-                            onTap: () {
-                              if(formKey.currentState!.validate() == true){
-                                FocusScope.of(context).requestFocus(
-                                  FocusNode(),
+                          BlocConsumer<SignUpCubit,SignUpStates>(
+                            listener: (context, state) {
+                              if (state is SignUpFailureStates) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(state.errorMessage),
+                                    backgroundColor: AppColors.red,
+                                    behavior: SnackBarBehavior.floating,
+                                    showCloseIcon: true,
+                                  ),
+                                );
+                              } else if (state is SignUpSuccessStates) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(AppTexts.signUpSuccess),
+                                    backgroundColor: AppColors.green,
+                                    behavior: SnackBarBehavior.floating,
+                                    showCloseIcon: true,
+                                  ),
                                 );
                               }
+                            },
+                            builder: (context, state) {
+                              return state is SignUpLoadingStates
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : CustomButton(
+                                      titleButton: AppTexts.signUp,
+                                      onTap: () {
+                                        if (formKey.currentState!.validate() ==
+                                                true &&
+                                            BlocProvider.of<SignUpCubit>(
+                                                        context)
+                                                    .imageToBase64 !=
+                                                null) {
+                                          FocusScope.of(context).requestFocus(
+                                            FocusNode(),
+                                          );
+                                          BlocProvider.of<SignUpCubit>(context)
+                                              .signUp(
+                                            userSignUpModel: UserSignUpModel(
+                                              name: nameController.text.trim(),
+                                              email:
+                                                  emailController.text.trim(),
+                                              phone:
+                                                  phoneController.text.trim(),
+                                              password: passwordController.text
+                                                  .trim(),
+                                              image:
+                                                  BlocProvider.of<SignUpCubit>(
+                                                          context)
+                                                      .imageToBase64!,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    );
                             },
                           ),
                           SizedBox(

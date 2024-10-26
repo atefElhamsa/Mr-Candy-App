@@ -1,6 +1,7 @@
 class AppTexts {
   static const String onboardingText1 = "موزع معتمد";
   static const String loginSuccess = "تم تسجيل الدخول بنجاح";
+  static const String signUpSuccess = "تم انشاء الحساب بنجاح";
   static const String skip = "تخطى";
   static const String addPhoto = "اضف صورة شخصية";
   static const String updatePhoto = "تعديل الصورة";
