@@ -220,8 +220,8 @@ class _SignUpBodyState extends State<SignUpBody> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          BlocConsumer<SignUpCubit,SignUpStates>(
-                            listener: (context, state) {
+                          BlocConsumer<SignUpCubit, SignUpStates>(
+                            listener: (context, state) async {
                               if (state is SignUpFailureStates) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -240,6 +240,10 @@ class _SignUpBodyState extends State<SignUpBody> {
                                     showCloseIcon: true,
                                   ),
                                 );
+                                await Future.delayed(
+                                  const Duration(seconds: 2),
+                                );
+                                Navigator.pop(context);
                               }
                             },
                             builder: (context, state) {

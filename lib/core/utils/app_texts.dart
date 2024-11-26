@@ -3,6 +3,12 @@ class AppTexts {
   static const String loginSuccess = "تم تسجيل الدخول بنجاح";
   static const String signUpSuccess = "تم انشاء الحساب بنجاح";
   static const String skip = "تخطى";
+  static const String homeMain = "الرئيسية";
+  static const String homeFav = "المفضلة";
+  static const String homeCarts = "السلة";
+  static const String homeSetting = "الاعدادات";
+  static const String token = "token";
+  static const String nameOfBox = "setting";
   static const String addPhoto = "اضف صورة شخصية";
   static const String updatePhoto = "تعديل الصورة";
   static const String onboardingText2 = "طلباتك كلها عندنا";

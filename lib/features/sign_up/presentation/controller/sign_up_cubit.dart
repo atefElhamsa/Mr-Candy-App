@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/sign_up/data/models/sign_up_model.dart';
 import 'package:mr_candy/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:mr_candy/features/sign_up/presentation/controller/sign_up_states.dart';
@@ -19,7 +21,9 @@ class SignUpCubit extends Cubit<SignUpStates> {
       (l) {
         emit(SignUpFailureStates(errorMessage: l.message));
       },
-      (r) {
+      (r) async {
+        var box = Hive.box(AppTexts.nameOfBox);
+        await box.put(AppTexts.token, r.token);
         emit(SignUpSuccessStates(userModel: r));
       },
     );

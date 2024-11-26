@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/login/data/repos/login_repo.dart';
 import 'package:mr_candy/features/login/presentation/controller/login_states.dart';
 
@@ -16,7 +18,9 @@ class LoginCubit extends Cubit<LoginStates> {
       (l) {
         emit(LoginFailureStates(errorMessage: l.message));
       },
-      (r) {
+      (r) async {
+        var box = Hive.box(AppTexts.nameOfBox);
+        await box.put(AppTexts.token, r.token);
         emit(LoginSuccessStates(userModel: r));
       },
     );

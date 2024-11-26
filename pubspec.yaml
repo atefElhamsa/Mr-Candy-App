@@ -41,6 +41,8 @@ dependencies:
   flutter_bloc: ^8.1.6
   dartz: ^0.10.1
   http: ^1.2.2
+  hive_flutter: ^1.1.0
+  flutter_svg: ^2.0.15
 
 dev_dependencies:
   flutter_test:

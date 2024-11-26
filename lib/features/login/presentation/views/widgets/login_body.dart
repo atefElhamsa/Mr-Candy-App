@@ -6,6 +6,7 @@ import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/shared_widgets/custom_field.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dart';
 import 'package:mr_candy/features/login/presentation/controller/login_cubit.dart';
 import 'package:mr_candy/features/login/presentation/controller/login_states.dart';
 import 'package:mr_candy/features/sign_up/presentation/views/sign_up_screen.dart';
@@ -98,8 +99,8 @@ class _LoginBodyState extends State<LoginBody> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          BlocConsumer<LoginCubit,LoginStates>(
-                            listener: (context, state) {
+                          BlocConsumer<LoginCubit, LoginStates>(
+                            listener: (context, state) async {
                               if (state is LoginFailureStates) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -116,6 +117,17 @@ class _LoginBodyState extends State<LoginBody> {
                                     backgroundColor: AppColors.green,
                                     behavior: SnackBarBehavior.floating,
                                     showCloseIcon: true,
+                                  ),
+                                );
+                                await Future.delayed(
+                                  const Duration(seconds: 2),
+                                );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return const HomeBottomScreen();
+                                    },
                                   ),
                                 );
                               }

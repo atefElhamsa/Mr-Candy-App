@@ -12,6 +12,7 @@ class AppColors {
   static const Color loginAppbar1 = Color(0XFF8515CD);
   static const Color loginAppbar2 = Color(0XFF701CCD);
   static const Color loginAppbar3 = Color(0XFF5028CD);
+  static const Color navBar = Color(0XFF1A48BF);
   static const Color white = Colors.white;
   static const Color red = Colors.red;
   static const Color green = Colors.green;
