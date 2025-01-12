@@ -16,7 +16,9 @@ class AppColors {
   static const Color white = Colors.white;
   static const Color red = Colors.red;
   static const Color green = Colors.green;
+  static const Color grey = Colors.grey;
   static const Color transparent = Colors.transparent;
   static const Color iconsFormFieldColor = Color(0XFF5E22CD);
   static const Color dontHaveAnAccount = Color(0XFF626262);
+  static const Color activeSmooth = Color(0XFF5824CD);
 }

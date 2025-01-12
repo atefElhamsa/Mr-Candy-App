@@ -10,4 +10,5 @@ class AppImages {
   static const String cartsHome = "assets/images/carts.svg";
   static const String cartsActiveHome = "assets/images/carts_active.svg";
   static const String settingHome = "assets/images/setting.svg";
+  static const String banner = "assets/images/banner.png";
 }

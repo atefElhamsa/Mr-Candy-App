@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/home/data/repos/home_repo_implementation.dart';
+import 'package:mr_candy/features/home/presentation/controller/get_banners/get_banners_cubit.dart';
+import 'package:mr_candy/features/home/presentation/views/home_main_screen.dart';
 
 class HomeBottomScreen extends StatefulWidget {
   const HomeBottomScreen({super.key});
@@ -13,6 +17,21 @@ class HomeBottomScreen extends StatefulWidget {
 
 class _HomeBottomScreenState extends State<HomeBottomScreen> {
   int currentIndex = 0;
+  List screens = [
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BannersCubit(
+            homeRepo: HomeRepoImplementation(),
+          ),
+        ),
+      ],
+      child: const HomeMainScreen(),
+    ),
+    const Icon(Icons.favorite),
+    const Icon(Icons.add_shopping_cart),
+    const Icon(Icons.settings),
+  ];
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -66,6 +85,7 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
             ),
           ),
         ),
+        body: screens[currentIndex],
       ),
     );
   }

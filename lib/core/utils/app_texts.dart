@@ -4,6 +4,7 @@ class AppTexts {
   static const String signUpSuccess = "تم انشاء الحساب بنجاح";
   static const String skip = "تخطى";
   static const String homeMain = "الرئيسية";
+  static const String retry = "حاول مرة اخرى";
   static const String homeFav = "المفضلة";
   static const String homeCarts = "السلة";
   static const String homeSetting = "الاعدادات";
@@ -16,6 +17,7 @@ class AppTexts {
   static const String errorEmail = "من فضلك ادخل البريد الألكتروني";
   static const String errorPassword = "من فضلك ادخل كلمة المرور";
   static const String errorName = "من فضلك ادخل الأسم";
+  static const String products = "الأقسام";
   static const String errorPhone = "من فضلك ادخل رقم الهاتف";
   static const String createAnAccount = "قم بإنشاء حساب";
   static const String signUpAccount = "قم بتسجيل الدخول";
