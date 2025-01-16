@@ -14,7 +14,7 @@ class BestSellerWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
           decoration: BoxDecoration(
             color: AppColors.bestSellerColorContainer,
             borderRadius: BorderRadius.circular(10.r),
@@ -90,7 +90,7 @@ class BestSellerWidget extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 20.w),
                     child: Text(
-                      productModel.name.substring(0, 20),
+                      productModel.name.substring(0, 19),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.almarai(

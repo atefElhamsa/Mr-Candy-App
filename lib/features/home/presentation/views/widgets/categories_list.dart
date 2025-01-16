@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
-import 'package:mr_candy/features/category_details/presentation/view/category_details_screen.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_states.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../category_details/presentation/view/category_details_screen.dart';
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({super.key});
@@ -33,12 +33,12 @@ class CategoriesList extends StatelessWidget {
               ...state.categories.map(
                 (e) => GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) {
-                    //     return CategoryDetailsScreen(title: e.name);
-                    //   }),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return CategoryDetailsScreen(title: e.name);
+                      }),
+                    );
                   },
                   child: Container(
                     width: MediaQuery.sizeOf(context).width * 0.3,
