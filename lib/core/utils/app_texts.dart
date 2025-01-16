@@ -25,11 +25,13 @@ class AppTexts {
   static const String haveAccount = "لديك حساب؟";
   static const String signUp = "انشاء الحساب";
   static const String login = "تسجيل الدخول";
+  static const String theMostSeller = "الاكثر مبيعا";
   static const String textLabelPhone = "ادخل رقم الهاتف";
   static const String textLabelName = "ادخل الأسم";
   static const String textLabelPassword = "ادخل كلمة المرور";
   static const String textLabelEmail = "ادخل البريد الألكتروني";
   static const String onboardingTitleButton3 = "ابدأ";
+  static const String sweets = "مكسرات مشكل ابو عوف";
   static const String onboardingText3 = "اطلب حاجتك بكل سهولة";
   static const String noInternet = "No Internet";
   static const String errorOccurred = "Error Occurred";

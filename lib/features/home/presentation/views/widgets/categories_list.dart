@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
+import 'package:mr_candy/features/category_details/presentation/view/category_details_screen.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_states.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -30,41 +31,52 @@ class CategoriesList extends StatelessWidget {
             runSpacing: MediaQuery.sizeOf(context).height * 0.01,
             children: [
               ...state.categories.map(
-                (e) => Container(
-                  width: MediaQuery.sizeOf(context).width * 0.3,
-                  height: MediaQuery.sizeOf(context).height * 0.15,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(
-                      MediaQuery.sizeOf(context).width * 0.05,
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl: e.image,
-                        height: MediaQuery.sizeOf(context).height * 0.1,
-                        errorWidget: (c, u, e) {
-                          return const Icon(Icons.error_outline_rounded);
-                        },
-                        placeholder: (c, e) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
+                (e) => GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) {
+                    //     return CategoryDetailsScreen(title: e.name);
+                    //   }),
+                    // );
+                  },
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width * 0.3,
+                    height: MediaQuery.sizeOf(context).height * 0.15,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(
+                        MediaQuery.sizeOf(context).width * 0.05,
                       ),
-                      Text(
-                        e.name,
-                        style: GoogleFonts.almarai(
-                          textStyle: TextStyle(
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: MediaQuery.sizeOf(context).height * 0.02,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: e.image,
+                          height: MediaQuery.sizeOf(context).height * 0.1,
+                          errorWidget: (c, u, e) {
+                            return const Icon(Icons.error_outline_rounded);
+                          },
+                          placeholder: (c, e) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        ),
+                        Text(
+                          e.name,
+                          style: GoogleFonts.almarai(
+                            textStyle: TextStyle(
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize:
+                                  MediaQuery.sizeOf(context).height * 0.02,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

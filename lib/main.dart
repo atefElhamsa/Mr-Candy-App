@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dart';
@@ -8,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox(AppTexts.nameOfBox);
+  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
@@ -16,11 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Hive.box(AppTexts.nameOfBox).get("token") == null
-          ? const SplashScreen()
-          : const HomeBottomScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 1006),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Hive.box(AppTexts.nameOfBox).get("token") == null
+              ? const SplashScreen()
+              : const HomeBottomScreen(),
+        );
+      },
     );
   }
 }
