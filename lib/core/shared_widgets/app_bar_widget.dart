@@ -25,7 +25,7 @@ class AppBarWidget extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.only(top: 30.h),
+        padding: EdgeInsets.only(top: 50.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -88,9 +88,9 @@ class BestSellerWidget extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 20.w),
+                    padding: EdgeInsets.only(left: 35.w),
                     child: Text(
-                      productModel.name.substring(0, 19),
+                      productModel.name.substring(0, 15),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.almarai(
@@ -103,7 +103,7 @@ class BestSellerWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 70.w),
+                    padding: EdgeInsets.only(left: 40.w),
                     child: Text(
                       "${productModel.price}جنيه",
                       maxLines: 1,

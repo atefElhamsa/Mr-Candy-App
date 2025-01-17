@@ -110,4 +110,45 @@ class HomeRepoImplementation implements HomeRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, List<ProductModel>>> getCategoryDetails(
+      {required int id}) async {
+    try {
+      var response = await http.get(
+        Uri.parse("${EndPoints.baseUrl + EndPoints.categories}/$id"),
+      );
+      var body = jsonDecode(response.body);
+      if (body["status"]) {
+        var result = List<ProductModel>.from(
+          (body["data"]["data"] as List).map(
+            (e) => ProductModel(
+              id: e["id"],
+              description: e["description"],
+              discount: e["discount"],
+              inCart: e["in_cart"],
+              inFavorites: e["in_favorites"],
+              name: e["name"],
+              oldPrice: e["old_price"],
+              price: e["price"],
+              image: e["image"],
+            ),
+          ),
+        );
+        return right(result);
+      } else {
+        return left(
+          ApiFailure(message: body["message"]),
+        );
+      }
+    } on SocketException {
+      return left(
+        NoInternetFailure(message: "No Internet"),
+      );
+    } catch (error) {
+      return left(
+        ApiFailure(message: "Error Occurred"),
+      );
+    }
+  }
 }
