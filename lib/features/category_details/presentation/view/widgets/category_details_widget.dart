@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_candy/core/utils/app_images.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/home/data/models/product_model.dart';
 import '../../../../../core/utils/app_colors.dart';
 
-class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({super.key});
+class CategoryDetailsWidget extends StatelessWidget {
+  const CategoryDetailsWidget({super.key, required this.productModel});
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,10 @@ class CategoryWidget extends StatelessWidget {
         children: [
           10.verticalSpace,
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 10.h,
+            ),
             decoration: BoxDecoration(
               color: AppColors.bestSellerColorContainer,
               borderRadius: BorderRadius.circular(10.r),
@@ -35,7 +39,7 @@ class CategoryWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4.r),
                       ),
                       child: Text(
-                        "-20%",
+                        "-${productModel.discount}%",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                             color: AppColors.white,
@@ -67,7 +71,18 @@ class CategoryWidget extends StatelessWidget {
                 const SizedBox(
                   height: 2,
                 ),
-                Image.asset(AppImages.potato),
+                CachedNetworkImage(
+                  imageUrl: productModel.image,
+                  height: MediaQuery.sizeOf(context).height * 0.1,
+                  errorWidget: (c, u, e) {
+                    return const Icon(Icons.error_outline_rounded);
+                  },
+                  placeholder: (c, e) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -91,32 +106,47 @@ class CategoryWidget extends StatelessWidget {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 0.w),
+                      padding: EdgeInsets.only(left: 19.w),
                       child: Text(
-                        AppTexts.sweets,
+                        productModel.name.substring(0, 15),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.almarai(
                           textStyle: TextStyle(
                             color: AppColors.black,
                             fontWeight: FontWeight.w400,
-                            fontSize: 12.sp,
+                            fontSize: 15.sp,
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 70.w),
-                      child: Text(
-                        "جنيه 125",
-                        maxLines: 1,
-                        style: GoogleFonts.almarai(
-                          textStyle: TextStyle(
-                            color: AppColors.loginAppbar1,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 17.sp,
+                      padding: EdgeInsets.only(left: 40.w),
+                      child: Row(
+                        children: [
+                          Text(
+                            maxLines: 1,
+                            "جنيه",
+                            style: GoogleFonts.almarai(
+                              textStyle: TextStyle(
+                                color: AppColors.loginAppbar1,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17.sp,
+                              ),
+                            ),
                           ),
-                        ),
+                          Text(
+                            maxLines: 1,
+                            productModel.price.toString(),
+                            style: GoogleFonts.almarai(
+                              textStyle: TextStyle(
+                                color: AppColors.loginAppbar1,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17.sp,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

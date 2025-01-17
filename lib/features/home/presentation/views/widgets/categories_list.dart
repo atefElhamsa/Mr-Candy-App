@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_cubit.dart';
@@ -36,7 +37,10 @@ class CategoriesList extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        return CategoryDetailsScreen(title: e.name);
+                        return CategoryDetailsScreen(
+                          title: e.name,
+                          id: e.id,
+                        );
                       }),
                     );
                   },
@@ -83,7 +87,18 @@ class CategoriesList extends StatelessWidget {
             ],
           );
         } else {
-          return const SizedBox();
+          return Center(
+            child: Text(
+              "No Existed Data",
+              style: GoogleFonts.almarai(
+                textStyle: TextStyle(
+                  color: AppColors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.h,
+                ),
+              ),
+            ),
+          );
         }
       },
     );
