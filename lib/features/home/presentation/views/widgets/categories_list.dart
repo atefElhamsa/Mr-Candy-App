@@ -23,6 +23,9 @@ class CategoriesList extends StatelessWidget {
         } else if (state is CategoriesFailureStates) {
           return FailureWidget(
             errorMessage: state.errorMessage,
+            onPressed: () {
+              BlocProvider.of<CategoriesCubit>(context).getCategories();
+            },
           );
         } else if (state is CategoriesSuccessStates) {
           return Wrap(

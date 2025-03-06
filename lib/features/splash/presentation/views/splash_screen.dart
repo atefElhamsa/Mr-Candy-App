@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
+import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dart';
 import 'package:mr_candy/features/onboarding/presentation/views/onboarding_screen.dart';
+
+import '../../../../core/utils/app_texts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(
       const Duration(
-        seconds: 3,
+        milliseconds: 350,
       ),
       () {
         navigateToLogin();
@@ -28,7 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) {
-        return const OnboardingScreen();
+        return Hive.box(AppTexts.nameOfBox).get("token") == null
+            ? const OnboardingScreen()
+            : const HomeBottomScreen();
       }),
     );
   }

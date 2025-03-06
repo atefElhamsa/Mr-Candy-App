@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
-import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dart';
 import 'package:mr_candy/features/splash/presentation/views/splash_screen.dart';
 
 void main() async {
@@ -23,11 +22,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Hive.box(AppTexts.nameOfBox).get("token") == null
-              ? const SplashScreen()
-              : const HomeBottomScreen(),
+          home: SplashScreen(),
         );
       },
     );

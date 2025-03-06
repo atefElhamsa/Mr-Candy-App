@@ -44,7 +44,7 @@ class _OnboardingBodyState extends State<OnboardingBody> {
                     onPressed: () {
                       pageController.animateToPage(
                         onboardings.length - 1,
-                        duration: const Duration(seconds: 1),
+                        duration: const Duration(microseconds: 450),
                         curve: Curves.decelerate,
                       );
                     },

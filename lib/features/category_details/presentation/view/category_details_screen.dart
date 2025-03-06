@@ -13,6 +13,7 @@ class CategoryDetailsScreen extends StatelessWidget {
   final String title;
   final int id;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +22,7 @@ class CategoryDetailsScreen extends StatelessWidget {
         leading: const SizedBox(),
         flexibleSpace: AppBarWidget(name: title),
       ),
+
       body: BlocProvider(
         create: (context) => CategoryDetailsCubit(homeRepo: HomeRepoImplementation()),
         child: CategoryDetailsList(id: id),
