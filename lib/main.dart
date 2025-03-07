@@ -61,6 +61,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
+          title: "Mr Candy",
           home: SplashScreen(),
         );
       },

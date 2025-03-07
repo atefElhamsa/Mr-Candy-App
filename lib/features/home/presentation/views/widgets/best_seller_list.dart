@@ -36,7 +36,8 @@ class BestSellerList extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return BestSellerWidget(
-                        productModel: productsList[index]);
+                      productModel: productsList[index],
+                    );
                   },
                   separatorBuilder: (context, index) {
                     return 20.horizontalSpace;

@@ -8,6 +8,7 @@ class ProductModel extends Equatable {
   final String name;
   final String image;
   final String description;
+  List<String> images;
   bool inFavorites;
   bool inCart;
 
@@ -21,6 +22,7 @@ class ProductModel extends Equatable {
     required this.inCart,
     required this.description,
     required this.image,
+    required this.images,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -42,6 +44,9 @@ class ProductModel extends Equatable {
       description: json['description'] ?? '',
       inFavorites: json['in_favorites'] ?? false,
       inCart: json['in_cart'] ?? false,
+      images: json['images'] != null && json['images'] is List
+          ? List<String>.from(json['images'])
+          : [],
     );
   }
 
@@ -56,6 +61,7 @@ class ProductModel extends Equatable {
       'description': description,
       'in_favorites': inFavorites,
       'in_cart': inCart,
+      'images': images,
     };
   }
 
@@ -70,6 +76,7 @@ class ProductModel extends Equatable {
         image,
         description,
         inFavorites,
-        inCart
+        inCart,
+        images,
       ];
 }

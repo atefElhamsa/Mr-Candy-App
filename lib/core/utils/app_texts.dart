@@ -31,6 +31,7 @@ class AppTexts {
   static const String textLabelPassword = "ادخل كلمة المرور";
   static const String textLabelEmail = "ادخل البريد الألكتروني";
   static const String onboardingTitleButton3 = "ابدأ";
+  static const String categoryDetail = "تفاصيل المنتج";
   static const String sweets = "مكسرات مشكل ابو عوف";
   static const String onboardingText3 = "اطلب حاجتك بكل سهولة";
   static const String noInternet = "No Internet";
