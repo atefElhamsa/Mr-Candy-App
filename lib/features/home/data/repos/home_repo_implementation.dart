@@ -12,18 +12,22 @@ import 'package:http/http.dart' as http;
 class HomeRepoImplementation implements HomeRepo {
   @override
   Future<Either<Failure, List<BannerModel>>> getBanners() async {
+    List<BannerModel> banners = [];
     try {
       var response = await http.get(
         Uri.parse(EndPoints.baseUrl + EndPoints.banners),
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {
-        var result = List<BannerModel>.from(
-          (body["data"] as List).map(
-            (e) => BannerModel(image: e["image"], id: e["id"]),
-          ),
-        );
-        return right(result);
+        for (var banner in body["data"]) {
+          banners.add(
+            BannerModel(
+              image: banner["image"],
+              id: banner["id"],
+            ),
+          );
+        }
+        return right(banners);
       } else {
         return left(
           ApiFailure(message: body["message"]),
@@ -42,19 +46,23 @@ class HomeRepoImplementation implements HomeRepo {
 
   @override
   Future<Either<Failure, List<CategoryModel>>> getCategories() async {
+    List<CategoryModel> categoriesList = [];
     try {
       var response = await http.get(
         Uri.parse(EndPoints.baseUrl + EndPoints.categories),
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {
-        var result = List<CategoryModel>.from(
-          (body["data"]["data"] as List).map(
-            (e) =>
-                CategoryModel(image: e["image"], id: e["id"], name: e["name"]),
-          ),
-        );
-        return right(result);
+        for (var category in body["data"]["data"]) {
+          categoriesList.add(
+            CategoryModel(
+              id: category['id'],
+              name: category['name'],
+              image: category['image'],
+            ),
+          );
+        }
+        return right(categoriesList);
       } else {
         return left(
           ApiFailure(message: body["message"]),
@@ -73,28 +81,17 @@ class HomeRepoImplementation implements HomeRepo {
 
   @override
   Future<Either<Failure, List<ProductModel>>> getBestSellerProducts() async {
+    List<ProductModel> productList = [];
     try {
       var response = await http.get(
         Uri.parse(EndPoints.baseUrl + EndPoints.home),
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {
-        var result = List<ProductModel>.from(
-          (body["data"]["products"] as List).map(
-            (e) => ProductModel(
-              id: e["id"],
-              description: e["description"],
-              discount: e["discount"],
-              inCart: e["in_cart"],
-              inFavorites: e["in_favorites"],
-              name: e["name"],
-              oldPrice: e["old_price"],
-              price: e["price"],
-              image: e["image"],
-            ),
-          ),
-        );
-        return right(result);
+        for (var product in body["data"]["products"]) {
+          productList.add(ProductModel.fromJson(product));
+        }
+        return right(productList);
       } else {
         return left(
           ApiFailure(message: body["message"]),
@@ -114,28 +111,17 @@ class HomeRepoImplementation implements HomeRepo {
   @override
   Future<Either<Failure, List<ProductModel>>> getCategoryDetails(
       {required int id}) async {
+    List<ProductModel> categoryDetails = [];
     try {
       var response = await http.get(
         Uri.parse("${EndPoints.baseUrl + EndPoints.categories}/$id"),
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {
-        var result = List<ProductModel>.from(
-          (body["data"]["data"] as List).map(
-            (e) => ProductModel(
-              id: e["id"],
-              description: e["description"],
-              discount: e["discount"],
-              inCart: e["in_cart"],
-              inFavorites: e["in_favorites"],
-              name: e["name"],
-              oldPrice: e["old_price"],
-              price: e["price"],
-              image: e["image"],
-            ),
-          ),
-        );
-        return right(result);
+        for (var categoryDetail in body["data"]["data"]) {
+          categoryDetails.add(ProductModel.fromJson(categoryDetail));
+        }
+        return right(categoryDetails);
       } else {
         return left(
           ApiFailure(message: body["message"]),

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
-import 'package:mr_candy/features/home/presentation/controller/get_banners_cubit.dart';
-import 'package:mr_candy/features/home/presentation/controller/get_best_seller_product_cubit.dart';
-import 'package:mr_candy/features/home/presentation/controller/get_categories_cubit.dart';
 import 'package:mr_candy/features/home/presentation/views/widgets/banner_widget.dart';
 import 'package:mr_candy/features/home/presentation/views/widgets/best_seller_list.dart';
 import 'package:mr_candy/features/home/presentation/views/widgets/categories_list.dart';
@@ -19,18 +15,6 @@ class HomeMainScreen extends StatefulWidget {
 }
 
 class _HomeMainScreenState extends State<HomeMainScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.wait(
-      [
-        context.read<BannersCubit>().getBanners(),
-        context.read<CategoriesCubit>().getCategories(),
-        context.read<BestSellerProductsCubit>().getBestSellerProducts(),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView(

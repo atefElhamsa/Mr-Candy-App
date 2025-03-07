@@ -34,95 +34,101 @@ class _BannerWidgetState extends State<BannerWidget> {
             },
           );
         } else if (state is BannersSuccessStates) {
-          return Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                height: MediaQuery.sizeOf(context).height * 0.25,
-                padding: EdgeInsets.only(
-                  top: MediaQuery.sizeOf(context).height * 0.05,
-                ),
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      AppColors.loginAppbar1,
-                      AppColors.navBar,
-                    ],
-                  ),
-                ),
-                child: Column(
+          final banners = BlocProvider.of<BannersCubit>(context).banners;
+          return banners.isEmpty
+              ? const Center(
+                  child: Text("No banners available"),
+                )
+              : Stack(
+                  alignment: Alignment.center,
+                  clipBehavior: Clip.none,
                   children: [
-                    Image.asset(
-                      AppImages.splashImage,
-                      height: MediaQuery.sizeOf(context).height * 0.1,
+                    Container(
+                      height: MediaQuery.sizeOf(context).height * 0.25,
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.sizeOf(context).height * 0.05,
+                      ),
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.loginAppbar1,
+                            AppColors.navBar,
+                          ],
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            AppImages.splashImage,
+                            height: MediaQuery.sizeOf(context).height * 0.1,
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.13,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.3,
-                      child: CarouselSlider(
-                        items: [
-                          ...state.banners.map(
-                            (e) => CachedNetworkImage(
-                              imageUrl: e.image,
-                              errorWidget: (c, u, e) {
-                                return const Icon(Icons.error_outline_rounded);
-                              },
-                              placeholder: (c, e) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * 0.13,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.sizeOf(context).height * 0.3,
+                            child: CarouselSlider(
+                              items: banners.map(
+                                (e) {
+                                  return CachedNetworkImage(
+                                    imageUrl: e.image,
+                                    errorWidget: (c, u, e) {
+                                      return const Icon(
+                                          Icons.error_outline_rounded);
+                                    },
+                                    placeholder: (c, e) {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                  );
+                                },
+                              ).toList(),
+                              options: CarouselOptions(
+                                viewportFraction: 0.8,
+                                initialPage: currentIndex,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: const Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    const Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.3,
+                                onPageChanged: (index, reason) {
+                                  currentIndex = index;
+                                  setState(() {});
+                                },
+                                scrollDirection: Axis.horizontal,
+                              ),
                             ),
                           ),
                         ],
-                        options: CarouselOptions(
-                          viewportFraction: 0.8,
+                      ),
+                    ),
+                    Positioned(
+                      top: MediaQuery.sizeOf(context).height * 0.43,
+                      child: SmoothPageIndicator(
+                        controller: PageController(
                           initialPage: currentIndex,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          enlargeFactor: 0.3,
-                          onPageChanged: (index, reason) {
-                            currentIndex = index;
-                            setState(() {});
-                          },
-                          scrollDirection: Axis.horizontal,
+                        ),
+                        count: banners.length,
+                        effect: ExpandingDotsEffect(
+                          dotHeight: MediaQuery.sizeOf(context).height * 0.01,
+                          dotWidth: MediaQuery.sizeOf(context).width * 0.03,
+                          activeDotColor: AppColors.activeSmooth,
+                          dotColor: AppColors.grey,
                         ),
                       ),
                     ),
                   ],
-                ),
-              ),
-              Positioned(
-                top: MediaQuery.sizeOf(context).height * 0.43,
-                child: SmoothPageIndicator(
-                  controller: PageController(
-                    initialPage: currentIndex,
-                  ),
-                  count: state.banners.length,
-                  effect: ExpandingDotsEffect(
-                    dotHeight: MediaQuery.sizeOf(context).height * 0.01,
-                    dotWidth: MediaQuery.sizeOf(context).width * 0.03,
-                    activeDotColor: AppColors.activeSmooth,
-                    dotColor: AppColors.grey,
-                  ),
-                ),
-              ),
-            ],
-          );
+                );
         } else {
           return const SizedBox();
         }

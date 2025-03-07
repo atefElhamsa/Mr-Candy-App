@@ -1,19 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/splash/presentation/views/splash_screen.dart';
+import 'features/home/presentation/controller/get_banners_cubit.dart';
+import 'features/home/presentation/controller/get_best_seller_product_cubit.dart';
+import 'features/home/presentation/controller/get_categories_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox(AppTexts.nameOfBox);
   await ScreenUtil.ensureScreenSize();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BannersCubit()..getBanners(),
+        ),
+        BlocProvider(
+          create: (context) => CategoriesCubit()..getCategories(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              BestSellerProductsCubit()..getBestSellerProducts(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    Future.wait(
+      [
+        context.read<BannersCubit>().getBanners(),
+        context.read<CategoriesCubit>().getCategories(),
+        context.read<BestSellerProductsCubit>().getBestSellerProducts(),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

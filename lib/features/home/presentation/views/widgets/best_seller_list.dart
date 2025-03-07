@@ -21,20 +21,28 @@ class BestSellerList extends StatelessWidget {
           return FailureWidget(
             errorMessage: state.errorMessage,
             onPressed: () {
-              BlocProvider.of<BestSellerProductsCubit>(context).getBestSellerProducts();
+              BlocProvider.of<BestSellerProductsCubit>(context)
+                  .getBestSellerProducts();
             },
           );
         } else if (state is BestSellerProductsSuccessStates) {
-          return ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return BestSellerWidget(productModel: state.products[index]);
-            },
-            separatorBuilder: (context, index) {
-              return 20.horizontalSpace;
-            },
-            itemCount: state.products.length,
-          );
+          final productsList =
+              BlocProvider.of<BestSellerProductsCubit>(context).productList;
+          return productsList.isEmpty
+              ? const Center(
+                  child: Text("No Products Available"),
+                )
+              : ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return BestSellerWidget(
+                        productModel: productsList[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return 20.horizontalSpace;
+                  },
+                  itemCount: productsList.length,
+                );
         } else {
           return const SizedBox();
         }

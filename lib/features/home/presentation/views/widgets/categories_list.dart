@@ -28,67 +28,76 @@ class CategoriesList extends StatelessWidget {
             },
           );
         } else if (state is CategoriesSuccessStates) {
-          return Wrap(
-            direction: Axis.horizontal,
-            alignment: WrapAlignment.spaceEvenly,
-            spacing: MediaQuery.sizeOf(context).width * 0.02,
-            runSpacing: MediaQuery.sizeOf(context).height * 0.01,
-            children: [
-              ...state.categories.map(
-                (e) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return CategoryDetailsScreen(
-                          title: e.name,
-                          id: e.id,
-                        );
-                      }),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 0.3,
-                    height: MediaQuery.sizeOf(context).height * 0.15,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(
-                        MediaQuery.sizeOf(context).width * 0.05,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: e.image,
-                          height: MediaQuery.sizeOf(context).height * 0.1,
-                          errorWidget: (c, u, e) {
-                            return const Icon(Icons.error_outline_rounded);
-                          },
-                          placeholder: (c, e) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
+          final categoriesList =
+              BlocProvider.of<CategoriesCubit>(context).categoriesList;
+          return categoriesList.isEmpty
+              ? const Center(
+                  child: Text("No Categorise Available"),
+                )
+              : Wrap(
+                  direction: Axis.horizontal,
+                  alignment: WrapAlignment.spaceEvenly,
+                  spacing: MediaQuery.sizeOf(context).width * 0.02,
+                  runSpacing: MediaQuery.sizeOf(context).height * 0.01,
+                  children: categoriesList
+                      .map(
+                        (e) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return CategoryDetailsScreen(
+                                  title: e.name,
+                                  id: e.id,
+                                );
+                              }),
                             );
                           },
-                        ),
-                        Text(
-                          e.name,
-                          style: GoogleFonts.almarai(
-                            textStyle: TextStyle(
-                              color: AppColors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize:
-                                  MediaQuery.sizeOf(context).height * 0.02,
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            height: MediaQuery.sizeOf(context).height * 0.15,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(
+                                MediaQuery.sizeOf(context).width * 0.05,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CachedNetworkImage(
+                                  imageUrl: e.image,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.1,
+                                  errorWidget: (c, u, e) {
+                                    return const Icon(
+                                        Icons.error_outline_rounded);
+                                  },
+                                  placeholder: (c, e) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
+                                ),
+                                Text(
+                                  e.name,
+                                  style: GoogleFonts.almarai(
+                                    textStyle: TextStyle(
+                                      color: AppColors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.02,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
+                      )
+                      .toList(),
+                );
         } else {
           return Center(
             child: Text(
