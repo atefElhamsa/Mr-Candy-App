@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 
 class CustomField extends StatelessWidget {
-  CustomField({
+  const CustomField({
     super.key,
     required this.keyboardType,
     required this.hintTitle,
@@ -20,7 +20,7 @@ class CustomField extends StatelessWidget {
   final String errorMessage;
   final TextEditingController controller;
   final FocusNode? focusNode;
-  void Function(String)? onFieldSubmitted;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {

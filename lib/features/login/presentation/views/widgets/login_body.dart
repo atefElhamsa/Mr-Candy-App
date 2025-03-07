@@ -122,14 +122,16 @@ class _LoginBodyState extends State<LoginBody> {
                                 await Future.delayed(
                                   const Duration(seconds: 2),
                                 );
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const HomeBottomScreen();
-                                    },
-                                  ),
-                                );
+                                if (context.mounted) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const HomeBottomScreen();
+                                      },
+                                    ),
+                                  );
+                                }
                               }
                             },
                             builder: (context, state) {

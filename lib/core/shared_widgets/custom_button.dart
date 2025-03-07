@@ -3,14 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({
+  const CustomButton({
     super.key,
     required this.titleButton,
     this.onTap,
   });
 
   final String titleButton;
-  void Function()? onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
