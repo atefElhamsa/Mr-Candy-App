@@ -243,7 +243,8 @@ class _SignUpBodyState extends State<SignUpBody> {
                                 await Future.delayed(
                                   const Duration(seconds: 2),
                                 );
-                                Navigator.pop(context);
+
+                                if (context.mounted) Navigator.pop(context);
                               }
                             },
                             builder: (context, state) {

@@ -36,7 +36,8 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
               showUnselectedLabels: true,
               elevation: 0,
               selectedItemColor: AppColors.white,
-              unselectedItemColor: AppColors.white.withOpacity(0.75),
+              unselectedItemColor:
+                  AppColors.white.withValues(alpha: (0.75 * 255)),
               type: BottomNavigationBarType.fixed,
               backgroundColor: AppColors.navBar,
               currentIndex: currentIndex,

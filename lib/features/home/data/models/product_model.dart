@@ -8,10 +8,10 @@ class ProductModel extends Equatable {
   final String name;
   final String image;
   final String description;
-  bool inFavorites;
-  bool inCart;
+  final bool inFavorites;
+  final bool inCart;
 
-  ProductModel({
+  const ProductModel({
     required this.id,
     required this.price,
     required this.oldPrice,

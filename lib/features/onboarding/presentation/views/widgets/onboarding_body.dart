@@ -79,7 +79,8 @@ class _OnboardingBodyState extends State<OnboardingBody> {
               textAlign: TextAlign.center,
               style: GoogleFonts.almarai(
                 textStyle: TextStyle(
-                    color: AppColors.descriptionColor.withOpacity(0.7),
+                    color: AppColors.descriptionColor
+                        .withValues(alpha: (0.7 * 255)),
                     fontWeight: FontWeight.w400,
                     fontSize: MediaQuery.of(context).size.height * 0.02),
               ),
