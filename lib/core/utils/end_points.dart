@@ -5,6 +5,7 @@ class EndPoints {
   static const String banners = "banners";
   static const String categories = "categories";
   static const String home = "home";
+  static const String favorites = "favorites";
 }
 
 

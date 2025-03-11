@@ -56,3 +56,49 @@ class AppBarWidget extends StatelessWidget {
     );
   }
 }
+
+class AppBarWidgetWithoutBack extends StatelessWidget {
+  const AppBarWidgetWithoutBack({super.key, required this.name});
+  final String name;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [AppColors.navBar1, AppColors.navBar],
+        ),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(
+            30.r,
+          ),
+          bottomRight: Radius.circular(
+            30.r,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(top: 50.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Center(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

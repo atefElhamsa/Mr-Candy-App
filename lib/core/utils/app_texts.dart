@@ -2,6 +2,8 @@ class AppTexts {
   static const String onboardingText1 = "موزع معتمد";
   static const String loginSuccess = "تم تسجيل الدخول بنجاح";
   static const String signUpSuccess = "تم انشاء الحساب بنجاح";
+  static const String delFav = "تم الحذف بنجاح";
+  static const String addFav = "تم الاضافة بنجاح";
   static const String skip = "تخطى";
   static const String homeMain = "الرئيسية";
   static const String retry = "حاول مرة اخرى";

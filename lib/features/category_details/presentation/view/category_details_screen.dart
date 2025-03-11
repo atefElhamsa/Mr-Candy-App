@@ -13,7 +13,6 @@ class CategoryDetailsScreen extends StatelessWidget {
   final String title;
   final int id;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

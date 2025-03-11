@@ -1,14 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
+import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
 import '../../../../../core/utils/app_colors.dart';
 
-class CategoryDetailsWidget extends StatelessWidget {
-  const CategoryDetailsWidget({super.key, required this.productModel});
-  final ProductModel productModel;
+class CategoryDetailsWidget extends StatefulWidget {
+  const CategoryDetailsWidget(
+      {super.key, required this.productModel, required this.index});
 
+  final ProductModel productModel;
+  final int index;
+
+  @override
+  State<CategoryDetailsWidget> createState() => _CategoryDetailsWidgetState();
+}
+
+class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +49,7 @@ class CategoryDetailsWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4.r),
                       ),
                       child: Text(
-                        "-${productModel.discount}%",
+                        "-${widget.productModel.discount}%",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
                             color: AppColors.white,
@@ -51,19 +61,38 @@ class CategoryDetailsWidget extends StatelessWidget {
                     ),
                     const Spacer(),
                     Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 4.w,
-                        vertical: 3.h,
-                      ),
                       width: 35.w,
                       height: 35.h,
                       decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.circular(20.r),
                       ),
-                      child: const Icon(
-                        Icons.favorite_border_rounded,
-                        color: AppColors.loginAppbar1,
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.productModel.inFavorites =
+                                !widget.productModel.inFavorites;
+                            BlocProvider.of<CategoryDetailsCubit>(context)
+                                .addFavourite(
+                              context: context,
+                              index: widget.index,
+                            );
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const Text("Done");
+                              },
+                            );
+                            Navigator.pop(context);
+                          });
+                        },
+                        icon: Icon(
+                          widget.productModel.inFavorites
+                              ? Icons.favorite_outlined
+                              : Icons.favorite_border_rounded,
+                          color: AppColors.loginAppbar1,
+                          size: 20.h,
+                        ),
                       ),
                     ),
                   ],
@@ -72,7 +101,7 @@ class CategoryDetailsWidget extends StatelessWidget {
                   height: 2,
                 ),
                 CachedNetworkImage(
-                  imageUrl: productModel.image,
+                  imageUrl: widget.productModel.image,
                   height: MediaQuery.sizeOf(context).height * 0.1,
                   errorWidget: (c, u, e) {
                     return const Icon(Icons.error_outline_rounded);
@@ -108,7 +137,7 @@ class CategoryDetailsWidget extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 19.w),
                       child: Text(
-                        productModel.name.substring(0, 15),
+                        widget.productModel.name.substring(0, 15),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.almarai(
@@ -137,7 +166,7 @@ class CategoryDetailsWidget extends StatelessWidget {
                           ),
                           Text(
                             maxLines: 1,
-                            productModel.price.toString(),
+                            widget.productModel.price.toString(),
                             style: GoogleFonts.almarai(
                               textStyle: TextStyle(
                                 color: AppColors.loginAppbar1,

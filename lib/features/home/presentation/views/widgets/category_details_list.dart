@@ -36,39 +36,42 @@ class _CategoryDetailsListState extends State<CategoryDetailsList> {
           return FailureWidget(errorMessage: state.errorMessage);
         } else if (state is CategoryDetailsSuccessStates) {
           final categoriesDetailsList =
-              BlocProvider.of<CategoryDetailsCubit>(context).categoryDetails;
+              BlocProvider
+                  .of<CategoryDetailsCubit>(context)
+                  .categoryDetails;
           return categoriesDetailsList.isEmpty
               ? const Center(
-                  child: Text("No Category Available"),
-                )
+            child: Text("No Category Available"),
+          )
               : GridView.builder(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 5,
-                  ),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ShowCategoryScreen(
-                                productModel: categoriesDetailsList[index],
-                              );
-                            },
-                          ),
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+            ),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ShowCategoryScreen(
+                          productModel: categoriesDetailsList[index],
                         );
                       },
-                      child: CategoryDetailsWidget(
-                        productModel: categoriesDetailsList[index],
-                      ),
-                    );
-                  },
-                  itemCount: categoriesDetailsList.length,
-                );
+                    ),
+                  );
+                },
+                child: CategoryDetailsWidget(
+                  index: index,
+                  productModel: categoriesDetailsList[index],
+                ),
+              );
+            },
+            itemCount: categoriesDetailsList.length,
+          );
         } else {
           return const SizedBox();
         }

@@ -24,19 +24,21 @@ class BestSellerWidget extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 4.w,
-                      vertical: 3.h,
-                    ),
                     width: 35.w,
                     height: 35.h,
                     decoration: BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.circular(20.r),
                     ),
-                    child: const Icon(
-                      Icons.favorite_border_rounded,
-                      color: AppColors.loginAppbar1,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        productModel.inFavorites
+                            ? Icons.favorite_outlined
+                            : Icons.favorite_border_rounded,
+                        color: AppColors.loginAppbar1,
+                        size: 20.h,
+                      ),
                     ),
                   ),
                   70.horizontalSpace,

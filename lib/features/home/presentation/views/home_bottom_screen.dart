@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/favourite/presentation/views/favourite_screen.dart';
 import 'package:mr_candy/features/home/presentation/views/home_main_screen.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomeBottomScreen extends StatefulWidget {
   const HomeBottomScreen({super.key});
@@ -16,7 +18,7 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
   int currentIndex = 0;
   List screens = [
     const HomeMainScreen(),
-    const Icon(Icons.favorite),
+    const FavouriteScreen(),
     const Icon(Icons.add_shopping_cart),
     const Icon(Icons.settings),
   ];
@@ -32,12 +34,9 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
               topLeft: Radius.circular(MediaQuery.sizeOf(context).width * 0.1),
               topRight: Radius.circular(MediaQuery.sizeOf(context).width * 0.1),
             ),
-            child: BottomNavigationBar(
-              showUnselectedLabels: true,
-              elevation: 0,
+            child: SalomonBottomBar(
               selectedItemColor: AppColors.white,
-              unselectedItemColor: AppColors.white.withOpacity(0.75),
-              type: BottomNavigationBarType.fixed,
+              unselectedItemColor: AppColors.grey,
               backgroundColor: AppColors.navBar,
               currentIndex: currentIndex,
               onTap: (value) {
@@ -45,29 +44,21 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
                 setState(() {});
               },
               items: [
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    currentIndex == 0
-                        ? AppImages.homeImage
-                        : AppImages.homeNotActiveImage,
-                  ),
-                  label: AppTexts.homeMain,
+                SalomonBottomBarItem(
+                  icon: Icon(CupertinoIcons.house_fill, size: 25.sp),
+                  title: const Text(AppTexts.homeMain),
                 ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AppImages.favHome),
-                  label: AppTexts.homeFav,
+                SalomonBottomBarItem(
+                  icon: Icon(CupertinoIcons.heart, size: 25.sp),
+                  title: const Text(AppTexts.homeFav),
                 ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(
-                    currentIndex == 2
-                        ? AppImages.cartsActiveHome
-                        : AppImages.cartsHome,
-                  ),
-                  label: AppTexts.homeCarts,
+                SalomonBottomBarItem(
+                  icon: Icon(CupertinoIcons.bag, size: 25.sp),
+                  title: const Text(AppTexts.homeCarts),
                 ),
-                BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AppImages.settingHome),
-                  label: AppTexts.homeSetting,
+                SalomonBottomBarItem(
+                  icon: Icon(Icons.settings, size: 25.sp),
+                  title: const Text(AppTexts.homeSetting),
                 ),
               ],
             ),

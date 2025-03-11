@@ -47,6 +47,8 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_screenutil: ^5.9.3
   equatable: ^2.0.7
+  salomon_bottom_bar: ^3.3.2
+  awesome_dialog: ^3.2.1
 
 dev_dependencies:
   flutter_test:
