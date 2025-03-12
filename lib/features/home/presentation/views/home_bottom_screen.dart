@@ -28,11 +28,11 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         bottomNavigationBar: SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.09,
+          height: 75.h,
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(MediaQuery.sizeOf(context).width * 0.1),
-              topRight: Radius.circular(MediaQuery.sizeOf(context).width * 0.1),
+              topLeft: Radius.circular(MediaQuery.sizeOf(context).width * 0.08),
+              topRight: Radius.circular(MediaQuery.sizeOf(context).width * 0.08),
             ),
             child: SalomonBottomBar(
               selectedItemColor: AppColors.white,

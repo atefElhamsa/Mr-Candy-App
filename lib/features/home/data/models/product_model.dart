@@ -8,7 +8,7 @@ class ProductModel extends Equatable {
   final String name;
   final String image;
   final String description;
-  List<String> images;
+  final List<String> images;
   bool inFavorites;
   bool inCart;
 
@@ -18,11 +18,11 @@ class ProductModel extends Equatable {
     required this.oldPrice,
     required this.discount,
     required this.name,
-    required this.inFavorites,
-    required this.inCart,
     required this.description,
     required this.image,
     required this.images,
+    this.inFavorites = false,
+    this.inCart = false,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -66,7 +66,6 @@ class ProductModel extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         id,
         price,

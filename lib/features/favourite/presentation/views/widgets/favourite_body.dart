@@ -32,7 +32,14 @@ class _FavouriteBodyState extends State<FavouriteBody> {
             child: CircularProgressIndicator(),
           );
         } else if (state is FavouritesFailureStates) {
-          return FailureWidget(errorMessage: state.errorMessage);
+          return Center(
+            child: FailureWidget(
+              errorMessage: state.errorMessage,
+              onPressed: () {
+                context.read<FavouriteCubit>().fetchFavourites();
+              },
+            ),
+          );
         } else if (state is FavouritesSuccessStates) {
           final favouriteList = state.favourites;
           return favouriteList.isEmpty
@@ -72,24 +79,28 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                       child: Center(
                                         child: IconButton(
                                           onPressed: () {
-                                            setState(() {
-                                              BlocProvider.of<FavouriteCubit>(
-                                                      context)
-                                                  .deleteFavourite(
-                                                context: context,
-                                                index: index,
-                                              );
-                                              favouriteList[index]
-                                                  .productModel
-                                                  .inFavorites = false;
-                                            });
+                                            favouriteList[index]
+                                                    .productModel
+                                                    .inFavorites =
+                                                !favouriteList[index]
+                                                    .productModel
+                                                    .inFavorites;
+                                            BlocProvider.of<FavouriteCubit>(
+                                                    context)
+                                                .deleteFavourite(
+                                              context: context,
+                                              index: index,
+                                            );
+                                            setState(() {});
                                           },
                                           icon: Icon(
                                             favouriteList[index]
-                                                    .productModel
-                                                    .inFavorites
+                                                        .productModel
+                                                        .inFavorites ==
+                                                    false
                                                 ? Icons.favorite_outlined
-                                                : Icons.favorite_border_rounded,
+                                                : Icons
+                                                    .favorite_border_rounded,
                                             color: AppColors.loginAppbar1,
                                             size: 20.h,
                                           ),
@@ -201,12 +212,13 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 ),
                                 const Spacer(),
                                 Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 4.w, bottom: 12.h),
+                                  padding: EdgeInsets.only(
+                                      left: 4.w, bottom: 12.h),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.buttonColor2,
-                                      borderRadius: BorderRadius.circular(4.r),
+                                      borderRadius:
+                                          BorderRadius.circular(4.r),
                                     ),
                                     child: const Icon(
                                       Icons.add,

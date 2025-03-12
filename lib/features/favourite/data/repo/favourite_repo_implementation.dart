@@ -11,10 +11,8 @@ import 'package:mr_candy/features/favourite/data/repo/favourite_repo.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import '../../../../core/utils/app_texts.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../home/data/models/product_model.dart';
 import '../../../home/presentation/controller/get_category_details_cubit.dart';
-
 
 class FavouriteRepoImplementation implements FavouriteRepo {
   @override
@@ -66,8 +64,10 @@ class FavouriteRepoImplementation implements FavouriteRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteFavourite(
-      {required BuildContext context, required int index}) async {
+  Future<Either<Failure, void>> deleteFavourite({
+    required BuildContext context,
+    required int index,
+  }) async {
     try {
       final token = Hive.box(AppTexts.nameOfBox).get("token");
       if (token == null || token.isEmpty) {
@@ -86,7 +86,7 @@ class FavouriteRepoImplementation implements FavouriteRepo {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         if (body["status"]) {
-          return right(null);
+          return const Right(null);
         } else {
           return left(
             ApiFailure(message: body["message"] ?? "Failed to delete item"),
@@ -152,7 +152,7 @@ class FavouriteRepoImplementation implements FavouriteRepo {
         return left(
           ApiFailure(
               message:
-              "Failed to fetch data, Status code: ${response.statusCode}"),
+                  "Failed to fetch data, Status code: ${response.statusCode}"),
         );
       }
     } on SocketException {

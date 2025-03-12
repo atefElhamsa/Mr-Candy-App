@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
-import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
 import '../../../../../core/utils/app_colors.dart';
 
 class CategoryDetailsWidget extends StatefulWidget {
-  const CategoryDetailsWidget(
-      {super.key, required this.productModel, required this.index});
+  const CategoryDetailsWidget({
+    super.key,
+    required this.productModel,
+    required this.index,
+  });
 
   final ProductModel productModel;
   final int index;
@@ -69,30 +72,28 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          setState(() {
-                            widget.productModel.inFavorites =
-                                !widget.productModel.inFavorites;
-                            BlocProvider.of<CategoryDetailsCubit>(context)
+                          widget.productModel.inFavorites =
+                              !widget.productModel.inFavorites;
+                          if (widget.productModel.inFavorites) {
+                            BlocProvider.of<FavouriteCubit>(context)
                                 .addFavourite(
                               context: context,
                               index: widget.index,
                             );
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const Text("Done");
-                              },
-                            );
-                            Navigator.pop(context);
-                          });
+                          }
+                          setState(() {});
                         },
-                        icon: Icon(
-                          widget.productModel.inFavorites
-                              ? Icons.favorite_outlined
-                              : Icons.favorite_border_rounded,
-                          color: AppColors.loginAppbar1,
-                          size: 20.h,
-                        ),
+                        icon: widget.productModel.inFavorites == true
+                            ? Icon(
+                                Icons.favorite_outlined,
+                                color: AppColors.loginAppbar1,
+                                size: 20.h,
+                              )
+                            : Icon(
+                                Icons.favorite_border_rounded,
+                                color: AppColors.loginAppbar1,
+                                size: 20.h,
+                              ),
                       ),
                     ),
                   ],

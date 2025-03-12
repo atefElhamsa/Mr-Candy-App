@@ -18,12 +18,14 @@ class BestSellerList extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is BestSellerProductsFailureStates) {
-          return FailureWidget(
-            errorMessage: state.errorMessage,
-            onPressed: () {
-              BlocProvider.of<BestSellerProductsCubit>(context)
-                  .getBestSellerProducts();
-            },
+          return Center(
+            child: FailureWidget(
+              errorMessage: state.errorMessage,
+              onPressed: () {
+                BlocProvider.of<BestSellerProductsCubit>(context)
+                    .getBestSellerProducts();
+              },
+            ),
           );
         } else if (state is BestSellerProductsSuccessStates) {
           final productsList =
@@ -36,6 +38,7 @@ class BestSellerList extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return BestSellerWidget(
+                      index: index,
                       productModel: productsList[index],
                     );
                   },

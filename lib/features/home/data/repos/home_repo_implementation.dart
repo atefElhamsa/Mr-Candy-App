@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/errors/failure.dart';
 import 'package:mr_candy/core/utils/end_points.dart';
 import 'package:mr_candy/features/home/data/models/banner_model.dart';
@@ -8,6 +11,8 @@ import 'package:mr_candy/features/home/data/models/category_model.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 import 'package:mr_candy/features/home/data/repos/home_repo.dart';
 import 'package:http/http.dart' as http;
+import '../../../../core/utils/app_texts.dart';
+import '../../presentation/controller/get_category_details_cubit.dart';
 
 class HomeRepoImplementation implements HomeRepo {
   @override

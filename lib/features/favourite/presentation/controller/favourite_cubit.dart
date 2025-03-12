@@ -37,7 +37,6 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
     required BuildContext context,
     required int index,
   }) async {
-    emit(FavouritesLoadingStates());
     final result = await favouriteRepoImplementation.addFavourite(
       context: context,
       index: index,
@@ -47,7 +46,23 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
         emit(FavouritesFailureStates(errorMessage: l.message));
       },
       (r) {
-        favouriteList.elementAt(index);
+        emit(FavouritesLoadingStates());
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: AppColors.green,
+            showCloseIcon: true,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 1),
+            content: Text(
+              AppTexts.addFav,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.h,
+              ),
+            ),
+          ),
+        );
         emit(FavouritesSuccessStates(favourites: List.from(favouriteList)));
       },
     );
@@ -70,8 +85,9 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
         favouriteList.removeAt(index);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: AppColors.green,
+            backgroundColor: AppColors.red,
             showCloseIcon: true,
+            duration: const Duration(seconds: 1),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             behavior: SnackBarBehavior.floating,
             content: Text(
