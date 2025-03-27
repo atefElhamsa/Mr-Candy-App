@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
+import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_states.dart';
 
@@ -43,8 +45,13 @@ class _FavouriteBodyState extends State<FavouriteBody> {
         } else if (state is FavouritesSuccessStates) {
           final favouriteList = state.favourites;
           return favouriteList.isEmpty
-              ? const Center(
-                  child: Text("No Favorites Found"),
+              ? Center(
+                  child: Lottie.asset(
+                    AppImages.emptyDataAnimation,
+                    height: 400.h,
+                    width: 400.w,
+                    fit: BoxFit.cover,
+                  ),
                 )
               : GridView.builder(
                   shrinkWrap: true,
@@ -99,8 +106,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                                         .inFavorites ==
                                                     false
                                                 ? Icons.favorite_outlined
-                                                : Icons
-                                                    .favorite_border_rounded,
+                                                : Icons.favorite_border_rounded,
                                             color: AppColors.loginAppbar1,
                                             size: 20.h,
                                           ),
@@ -212,13 +218,12 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 ),
                                 const Spacer(),
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 4.w, bottom: 12.h),
+                                  padding:
+                                      EdgeInsets.only(left: 4.w, bottom: 12.h),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.buttonColor2,
-                                      borderRadius:
-                                          BorderRadius.circular(4.r),
+                                      borderRadius: BorderRadius.circular(4.r),
                                     ),
                                     child: const Icon(
                                       Icons.add,

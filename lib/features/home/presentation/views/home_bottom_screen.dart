@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
+import 'package:mr_candy/features/carts/presentation/view/cart_screen.dart';
 import 'package:mr_candy/features/favourite/presentation/views/favourite_screen.dart';
 import 'package:mr_candy/features/home/presentation/views/home_main_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -19,7 +20,7 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
   List screens = [
     const HomeMainScreen(),
     const FavouriteScreen(),
-    const Icon(Icons.add_shopping_cart),
+    const CartScreen(),
     const Icon(Icons.settings),
   ];
   @override

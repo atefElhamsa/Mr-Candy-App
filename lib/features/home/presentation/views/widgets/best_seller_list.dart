@@ -38,7 +38,6 @@ class BestSellerList extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return BestSellerWidget(
-                      index: index,
                       productModel: productsList[index],
                     );
                   },

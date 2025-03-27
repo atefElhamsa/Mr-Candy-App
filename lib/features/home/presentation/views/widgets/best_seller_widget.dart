@@ -1,21 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 
 class BestSellerWidget extends StatefulWidget {
   const BestSellerWidget({
     super.key,
     required this.productModel,
-    required this.index,
   });
 
   final ProductModel productModel;
-  final int index;
 
   @override
   State<BestSellerWidget> createState() => _BestSellerWidgetState();
@@ -44,21 +40,9 @@ class _BestSellerWidgetState extends State<BestSellerWidget> {
                       borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: IconButton(
-                      onPressed: () {
-                        widget.productModel.inFavorites =
-                            !widget.productModel.inFavorites;
-                        if (widget.productModel.inFavorites) {
-                          BlocProvider.of<FavouriteCubit>(context).addFavourite(
-                            context: context,
-                            index: widget.index,
-                          );
-                        }
-                        setState(() {});
-                      },
+                      onPressed: () {},
                       icon: Icon(
-                        widget.productModel.inFavorites
-                            ? Icons.favorite_outlined
-                            : Icons.favorite_border_rounded,
+                        Icons.favorite_border_rounded,
                         color: AppColors.loginAppbar1,
                         size: 20.h,
                       ),

@@ -37,6 +37,7 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
     required BuildContext context,
     required int index,
   }) async {
+    emit(FavouritesLoadingStates());
     final result = await favouriteRepoImplementation.addFavourite(
       context: context,
       index: index,
@@ -46,7 +47,6 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
         emit(FavouritesFailureStates(errorMessage: l.message));
       },
       (r) {
-        emit(FavouritesLoadingStates());
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppColors.green,

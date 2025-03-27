@@ -7,7 +7,8 @@ import 'package:mr_candy/features/home/data/models/product_model.dart';
 
 class ShowCategoryScreen extends StatelessWidget {
   final ProductModel productModel;
-  const ShowCategoryScreen({super.key, required this.productModel});
+  int index;
+  ShowCategoryScreen({super.key, required this.productModel,required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class ShowCategoryScreen extends StatelessWidget {
       ),
       body: ShowCategoryWidget(
         productModel: productModel,
+        index: index,
       ),
     );
   }

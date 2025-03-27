@@ -13,4 +13,5 @@ class AppImages {
   static const String banner = "assets/images/banner.png";
   static const String drinks = "assets/images/drinks.png";
   static const String potato = "assets/images/potato.png";
+  static const String emptyDataAnimation = "assets/images/no_favourite.json";
 }

@@ -5,6 +5,9 @@ class AppTexts {
   static const String delFav = "تم الحذف بنجاح";
   static const String addFav = "تم الاضافة بنجاح";
   static const String skip = "تخطى";
+  static const String delete = "حذف";
+  static const String sure = "تأكيد";
+  static const String addCart = "أضف الى السلة";
   static const String homeMain = "الرئيسية";
   static const String retry = "حاول مرة اخرى";
   static const String homeFav = "المفضلة";
