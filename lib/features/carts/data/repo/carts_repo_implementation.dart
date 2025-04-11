@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/errors/failure.dart';
@@ -141,7 +142,9 @@ class CartRepoImplementation implements CartRepo {
             ),
           );
         } else {
-          print("Warning: 'cart_items' not found in response");
+          if (kDebugMode) {
+            print("Warning: 'cart_items' not found in response");
+          }
         }
         return right(cartItem);
       } else {
