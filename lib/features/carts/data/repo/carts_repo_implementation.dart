@@ -97,7 +97,9 @@ class CartRepoImplementation implements CartRepo {
         NoInternetFailure(message: "No Internet"),
       );
     } catch (e) {
-      return left(ApiFailure(message: "Error Occurred"));
+      return left(
+        ApiFailure(message: "Error Occurred"),
+      );
     }
   }
 
@@ -120,6 +122,7 @@ class CartRepoImplementation implements CartRepo {
           })
         },
       );
+
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         if (body["status"] != true) {
@@ -132,7 +135,11 @@ class CartRepoImplementation implements CartRepo {
         if (body["data"].containsKey("cart_items") &&
             body["data"]["cart_items"] != null) {
           final List<dynamic> cartItemsJson = body["data"]["cart_items"];
-          cartItem.addAll(cartItemsJson.map((e) => CartModel.fromJson(e)));
+          cartItem.addAll(
+            cartItemsJson.map(
+              (e) => CartModel.fromJson(e),
+            ),
+          );
         } else {
           print("Warning: 'cart_items' not found in response");
         }

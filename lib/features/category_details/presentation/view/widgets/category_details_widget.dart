@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -122,14 +123,20 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, bottom: 12.h),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.buttonColor2,
-                      borderRadius: BorderRadius.circular(4.r),
-                    ),
-                    child: const Icon(
-                      Icons.add,
-                      color: AppColors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<CartCubit>(context)
+                          .addCart(context, widget.index);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.buttonColor2,
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                      child: const Icon(
+                        Icons.add,
+                        color: AppColors.white,
+                      ),
                     ),
                   ),
                 ),

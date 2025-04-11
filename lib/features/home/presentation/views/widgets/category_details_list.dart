@@ -59,7 +59,6 @@ class _CategoryDetailsListState extends State<CategoryDetailsList> {
                             builder: (context) {
                               return ShowCategoryScreen(
                                 productModel: categoriesDetailsList[index],
-                                index: index,
                               );
                             },
                           ),

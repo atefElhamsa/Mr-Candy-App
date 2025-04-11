@@ -21,7 +21,7 @@ class CartBody extends StatefulWidget {
 
 class _CartBodyState extends State<CartBody> {
   bool isLoading = false;
-  var totalPrice;
+  num totalPrice = 0;
 
   @override
   void initState() {
@@ -54,6 +54,14 @@ class _CartBodyState extends State<CartBody> {
           );
         } else if (state is CartSuccessState) {
           final cartItems = state.cartList;
+          num sum() {
+            for (int i = 0; i < cartItems.length; i++) {
+              totalPrice +=
+                  cartItems[i].quantity * cartItems[i].productModel.price;
+            }
+            return totalPrice;
+          }
+
           return cartItems.isEmpty
               ? Center(
                   child: Lottie.asset(
@@ -68,10 +76,6 @@ class _CartBodyState extends State<CartBody> {
                     Expanded(
                       child: ListView.separated(
                         itemBuilder: (context, index) {
-                          for (var item in cartItems) {
-                            totalPrice =
-                                item.quantity * item.productModel.price;
-                          }
                           return Stack(
                             children: [
                               Container(
@@ -115,12 +119,13 @@ class _CartBodyState extends State<CartBody> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(left: 185.w),
+                                      padding: EdgeInsets.only(
+                                        right: 45.w,
+                                        left: 150.w,
+                                      ),
                                       child: Text(
-                                        cartItems[index]
-                                            .productModel
-                                            .name
-                                            .substring(0, 10),
+                                        cartItems[index].productModel.name,
+                                        maxLines: 1,
                                         style: GoogleFonts.cairo(
                                           fontSize: 30.h,
                                           color: AppColors.loginAppbar3,
@@ -175,7 +180,7 @@ class _CartBodyState extends State<CartBody> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(top: 15.h),
+                                      padding: EdgeInsets.only(top: 10.h),
                                       child: Row(
                                         spacing: 20.w,
                                         mainAxisAlignment:
@@ -190,6 +195,7 @@ class _CartBodyState extends State<CartBody> {
                                                           .quantity +
                                                       1,
                                                 );
+                                                totalPrice = 0;
                                               });
                                             },
                                             child: Container(
@@ -203,7 +209,7 @@ class _CartBodyState extends State<CartBody> {
                                                 child: Icon(
                                                   Icons.add,
                                                   color: AppColors.white,
-                                                  size: 30.h,
+                                                  size: 25.h,
                                                 ),
                                               ),
                                             ),
@@ -218,7 +224,7 @@ class _CartBodyState extends State<CartBody> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                if (cartItems[index].quantity >
+                                                if (cartItems[index].quantity >=
                                                     1) {
                                                   cartItems[index] =
                                                       cartItems[index].copyWith(
@@ -226,7 +232,14 @@ class _CartBodyState extends State<CartBody> {
                                                             .quantity -
                                                         1,
                                                   );
+                                                } else if (cartItems[index]
+                                                        .quantity <=
+                                                    0) {
+                                                  cartItems[index] =
+                                                      cartItems[index].copyWith(
+                                                          quantity: 0);
                                                 }
+                                                totalPrice = 0;
                                               });
                                             },
                                             child: Container(
@@ -239,7 +252,7 @@ class _CartBodyState extends State<CartBody> {
                                               child: Icon(
                                                 Icons.remove,
                                                 color: AppColors.white,
-                                                size: 30.h,
+                                                size: 25.h,
                                               ),
                                             ),
                                           ),
@@ -251,7 +264,7 @@ class _CartBodyState extends State<CartBody> {
                               ),
                               Positioned(
                                 top: 30.h,
-                                right: 262.w,
+                                right: 250.w,
                                 child: CachedNetworkImage(
                                   imageUrl: cartItems[index].productModel.image,
                                   height:
@@ -273,7 +286,7 @@ class _CartBodyState extends State<CartBody> {
                         },
                         separatorBuilder: (context, index) {
                           return SizedBox(
-                            height: 10.h,
+                            height: 5.h,
                           );
                         },
                         itemCount: cartItems.length,
@@ -307,17 +320,13 @@ class _CartBodyState extends State<CartBody> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          BlocBuilder<CartCubit, CartStates>(
-                            builder: (context, state) {
-                              return Text(
-                                "$totalPriceج",
-                                style: GoogleFonts.cairo(
-                                  fontSize: 30.h,
-                                  color: AppColors.loginAppbar3,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              );
-                            },
+                          Text(
+                            "${sum()}ج",
+                            style: GoogleFonts.cairo(
+                              fontSize: 30.h,
+                              color: AppColors.loginAppbar3,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ],
                       ),
@@ -336,7 +345,7 @@ class _CartBodyState extends State<CartBody> {
                       ),
                     ),
                     SizedBox(
-                      height: 8.h,
+                      height: 5.h,
                     ),
                   ],
                 );

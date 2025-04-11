@@ -1,17 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
-import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 
 class ShowCategoryWidget extends StatefulWidget {
   final ProductModel productModel;
-  int index;
-  ShowCategoryWidget({super.key, required this.productModel, required this.index});
+  const ShowCategoryWidget({super.key, required this.productModel});
 
   @override
   State<ShowCategoryWidget> createState() => _ShowCategoryWidgetState();
@@ -152,13 +147,6 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20.h),
-            CustomButton(
-              titleButton: AppTexts.addCart,
-              onTap: () {
-                BlocProvider.of<CartCubit>(context).addCart(context, widget.index);
-              },
-            )
           ],
         ),
       ),
