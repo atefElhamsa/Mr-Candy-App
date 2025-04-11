@@ -55,6 +55,7 @@ class _CartBodyState extends State<CartBody> {
         } else if (state is CartSuccessState) {
           final cartItems = state.cartList;
           num sum() {
+            totalPrice = 0;
             for (int i = 0; i < cartItems.length; i++) {
               totalPrice +=
                   cartItems[i].quantity * cartItems[i].productModel.price;
