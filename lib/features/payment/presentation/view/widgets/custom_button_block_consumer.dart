@@ -56,7 +56,7 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
                   PaymentIntentInputModel(
                 amount: "${context.read<CartCubit>().totalPrice}",
                 currency: 'USD',
-                customerId: 'cus_S1HVpjReS4TF6a',
+                customerId: 'cus_S7HLZw6cZIZfrk',
               );
               BlocProvider.of<PaymentCubit>(context).makePayment(
                 paymentIntentInputModel: paymentIntentInputModel,

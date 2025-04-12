@@ -6,6 +6,13 @@ class AppTexts {
   static const String addFav = "تم الاضافة بنجاح";
   static const String skip = "تخطى";
   static const String delete = "حذف";
+  static const String thankYou = "Thank you!";
+  static const String date = "Date";
+  static const String time = "Time";
+  static const String total = "Total";
+  static const String paid = "PAID";
+  static const String to = "To";
+  static const String successful = "Your transaction was successful";
   static const String sure = "تأكيد";
   static const String addCart = "أضف الى السلة";
   static const String homeMain = "الرئيسية";

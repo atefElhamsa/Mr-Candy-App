@@ -16,6 +16,7 @@ class CheckOutRepoImplementation implements CheckOutRepo {
       );
       return right(null);
     } catch (e) {
+      print(e);
       return left(
         ServiceFailure(message: e.toString()),
       );

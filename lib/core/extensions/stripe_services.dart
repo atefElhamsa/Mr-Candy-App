@@ -54,7 +54,8 @@ class StripeServices {
   }) async {
     var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
     var ephemeralkeyModel = await createEphemeralKey(
-        customerId: paymentIntentInputModel.customerId);
+      customerId: paymentIntentInputModel.customerId,
+    );
     var initPaymentSheetModel = InitPaymentSheetModel(
       clientSecret: paymentIntentModel.clientSecret!,
       customerId: paymentIntentInputModel.customerId!,
