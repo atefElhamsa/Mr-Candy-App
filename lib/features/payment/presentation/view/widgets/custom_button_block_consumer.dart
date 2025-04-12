@@ -52,6 +52,13 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
           child: CustomButton(
             onTap: () async {
               setState(() => widget.isLoading);
+              for (var item in context.read<CartCubit>().cartList) {
+                await BlocProvider.of<CartCubit>(context).updateCartQuantity(
+                  item.id,
+                  item.quantity,
+                );
+              }
+              await context.read<CartCubit>().confirmCartUpdate();
               PaymentIntentInputModel paymentIntentInputModel =
                   PaymentIntentInputModel(
                 amount: "${context.read<CartCubit>().totalPrice}",
@@ -61,13 +68,6 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
               BlocProvider.of<PaymentCubit>(context).makePayment(
                 paymentIntentInputModel: paymentIntentInputModel,
               );
-              for (var item in context.read<CartCubit>().cartList) {
-                await BlocProvider.of<CartCubit>(context).updateCartQuantity(
-                  item.id,
-                  item.quantity,
-                );
-              }
-              await context.read<CartCubit>().confirmCartUpdate();
               setState(() => widget.isLoading);
             },
             loading: state is PaymentLoadingState ? true : false,
