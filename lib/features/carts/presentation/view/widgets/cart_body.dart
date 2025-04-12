@@ -10,6 +10,9 @@ import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_states.dart';
+import 'package:mr_candy/features/carts/presentation/view/widgets/payment_method_bottom_sheet.dart';
+import 'package:mr_candy/features/payment/data/repo/checkout_repo_implementaion.dart';
+import 'package:mr_candy/features/payment/presentation/controller/payment_cubit.dart';
 import '../../../../../core/shared_widgets/failure_widget.dart';
 
 class CartBody extends StatefulWidget {
@@ -336,13 +339,30 @@ class _CartBodyState extends State<CartBody> {
                       height: 10.h,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
-                        left: 10.r,
-                        right: 10.r,
+                      padding: const EdgeInsets.only(
+                        right: 10,
+                        left: 10,
                       ),
-                      child: CustomButton(
-                        titleButton: AppTexts.sure,
-                        onTap: () {},
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: CustomButton(
+                          titleButton: AppTexts.sure,
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return BlocProvider(
+                                  create: (context) => PaymentCubit(
+                                    CheckOutRepoImplementation(),
+                                  ),
+                                  child: PaymentMethodBottomSheet(
+                                    isLoading: isLoading,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(

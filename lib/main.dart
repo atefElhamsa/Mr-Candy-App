@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mr_candy/core/extensions/api_keys.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
@@ -12,6 +14,7 @@ import 'features/home/presentation/controller/get_categories_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = ApiKeys.publishKey;
   await Hive.initFlutter();
   await Hive.openBox(AppTexts.nameOfBox);
   await ScreenUtil.ensureScreenSize();

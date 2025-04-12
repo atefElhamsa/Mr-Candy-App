@@ -14,4 +14,6 @@ class AppImages {
   static const String drinks = "assets/images/drinks.png";
   static const String potato = "assets/images/potato.png";
   static const String emptyDataAnimation = "assets/images/no_favourite.json";
+  static const String paypal = "assets/images/paypal.png";
+  static const String cardVisa = "assets/images/card_visa.png";
 }

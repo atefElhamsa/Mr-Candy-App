@@ -14,6 +14,7 @@ class AppTexts {
   static const String homeCarts = "السلة";
   static const String homeSetting = "الاعدادات";
   static const String token = "token";
+  static const String payment = "دفع";
   static const String nameOfBox = "setting";
   static const String addPhoto = "اضف صورة شخصية";
   static const String updatePhoto = "تعديل الصورة";
