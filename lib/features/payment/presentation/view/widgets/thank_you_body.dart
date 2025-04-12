@@ -5,7 +5,8 @@ import 'package:mr_candy/features/payment/presentation/view/widgets/thank_you_ca
 import '../../../../../core/utils/app_colors.dart';
 
 class ThankYouBody extends StatelessWidget {
-  const ThankYouBody({super.key});
+  const ThankYouBody({super.key, required this.totalPrice});
+  final num totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ThankYouBody extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          const ThankYouCard(),
+          ThankYouCard(totalPrice: totalPrice,),
           Positioned(
             left: -20,
             bottom: MediaQuery.sizeOf(context).height * 0.2,

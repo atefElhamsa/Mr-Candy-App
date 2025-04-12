@@ -12,8 +12,9 @@ import 'package:mr_candy/features/payment/presentation/view/thank_you_screen.dar
 import '../../../../../core/utils/app_colors.dart';
 
 class CustomButtonBlockConsumer extends StatefulWidget {
-  const CustomButtonBlockConsumer({super.key, required this.isLoading});
+  const CustomButtonBlockConsumer({super.key, required this.isLoading, required this.totalPrice});
   final bool isLoading;
+  final num totalPrice;
 
   @override
   State<CustomButtonBlockConsumer> createState() =>
@@ -29,7 +30,7 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ThankYouScreen(),
+              builder: (context) => ThankYouScreen(totalPrice: widget.totalPrice,),
             ),
           );
         }
@@ -52,22 +53,22 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
           child: CustomButton(
             onTap: () async {
               setState(() => widget.isLoading);
-              for (var item in context.read<CartCubit>().cartList) {
-                await BlocProvider.of<CartCubit>(context).updateCartQuantity(
-                  item.id,
-                  item.quantity,
-                );
-              }
-              await context.read<CartCubit>().confirmCartUpdate();
               PaymentIntentInputModel paymentIntentInputModel =
                   PaymentIntentInputModel(
-                amount: "${context.read<CartCubit>().totalPrice}",
+                amount: "${widget.totalPrice}",
                 currency: 'USD',
                 customerId: 'cus_S7HLZw6cZIZfrk',
               );
               BlocProvider.of<PaymentCubit>(context).makePayment(
                 paymentIntentInputModel: paymentIntentInputModel,
               );
+              for (var item in BlocProvider.of<CartCubit>(context).cartList) {
+                await BlocProvider.of<CartCubit>(context).updateCartQuantity(
+                  item.id,
+                  item.quantity,
+                );
+              }
+              await context.read<CartCubit>().confirmCartUpdate();
               setState(() => widget.isLoading);
             },
             loading: state is PaymentLoadingState ? true : false,

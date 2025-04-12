@@ -3,7 +3,8 @@ import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/features/payment/presentation/view/widgets/thank_you_body.dart';
 
 class ThankYouScreen extends StatelessWidget {
-  const ThankYouScreen({super.key});
+  const ThankYouScreen({super.key, required this.totalPrice});
+  final num totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ThankYouScreen extends StatelessWidget {
       ),
       body: Transform.translate(
         offset: const Offset(0, 30),
-        child: const ThankYouBody(),
+        child: ThankYouBody(totalPrice: totalPrice,),
       ),
     );
   }

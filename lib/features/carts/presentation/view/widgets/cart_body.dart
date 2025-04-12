@@ -357,6 +357,7 @@ class _CartBodyState extends State<CartBody> {
                                   ),
                                   child: PaymentMethodBottomSheet(
                                     isLoading: isLoading,
+                                    totalPrice: totalPrice,
                                   ),
                                 );
                               },

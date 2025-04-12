@@ -7,7 +7,8 @@ import '../../../../core/shared_widgets/app_bar_widget.dart';
 import '../../../../core/utils/app_texts.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  const PaymentScreen({super.key, required this.totalPrice});
+  final num totalPrice;
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -41,7 +42,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ThankYouScreen(),
+                            builder: (context) => ThankYouScreen(totalPrice: widget.totalPrice,),
                           ),
                         );
                       });

@@ -3,8 +3,9 @@ import 'package:mr_candy/features/payment/presentation/view/widgets/custom_butto
 import 'package:mr_candy/features/payment/presentation/view/widgets/payment_method.dart';
 
 class PaymentMethodBottomSheet extends StatefulWidget {
-  const PaymentMethodBottomSheet({super.key, required this.isLoading});
+  const PaymentMethodBottomSheet({super.key, required this.isLoading, required this.totalPrice});
   final bool isLoading;
+  final num totalPrice;
 
   @override
   State<PaymentMethodBottomSheet> createState() =>
@@ -24,6 +25,7 @@ class _PaymentMethodBottomSheetState extends State<PaymentMethodBottomSheet> {
           const SizedBox(height: 20),
           CustomButtonBlockConsumer(
             isLoading: widget.isLoading,
+            totalPrice: widget.totalPrice,
           ),
         ],
       ),

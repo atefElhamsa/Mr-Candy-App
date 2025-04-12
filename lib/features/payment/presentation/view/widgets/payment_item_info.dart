@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/utils/app_colors.dart';
 
 class PaymentItemInfo extends StatelessWidget {
-  const PaymentItemInfo({super.key, required this.title, required this.value});
+  PaymentItemInfo({super.key, required this.title, required this.value, this.dollar});
   final String title, value;
+  String? dollar;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,15 @@ class PaymentItemInfo extends StatelessWidget {
           const Spacer(),
           Text(
             value,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              color: AppColors.white,
+            ),
+          ),
+          Text(
+            dollar!,
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 20,

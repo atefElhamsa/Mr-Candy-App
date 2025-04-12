@@ -9,7 +9,8 @@ import 'package:mr_candy/features/payment/presentation/view/widgets/cart_info_wi
 import 'package:mr_candy/features/payment/presentation/view/widgets/payment_item_info.dart';
 
 class ThankYouCard extends StatelessWidget {
-  const ThankYouCard({super.key});
+  const ThankYouCard({super.key, required this.totalPrice});
+  final num totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +46,22 @@ class ThankYouCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const PaymentItemInfo(title: AppTexts.date, value: "1/2/2025"),
-            const PaymentItemInfo(title: AppTexts.time, value: "10:30 Am"),
-            const PaymentItemInfo(title: AppTexts.to, value: "Atef "),
+            PaymentItemInfo(
+              title: AppTexts.date,
+              value:
+                  "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
+              dollar: "",
+            ),
+            PaymentItemInfo(
+              title: AppTexts.time,
+              value: TimeOfDay.fromDateTime(DateTime.now()).format(context),
+              dollar: "",
+            ),
+            PaymentItemInfo(
+              title: AppTexts.to,
+              value: "Atef",
+              dollar: "",
+            ),
             const SizedBox(height: 15),
             Divider(
               thickness: 2,
@@ -55,7 +69,11 @@ class ThankYouCard extends StatelessWidget {
               endIndent: 15.w,
             ),
             const SizedBox(height: 20),
-            const PaymentItemInfo(title: AppTexts.total, value: r"50$"),
+            PaymentItemInfo(
+              title: AppTexts.total,
+              value: "${(totalPrice / 50)}",
+              dollar: r" $",
+            ),
             const SizedBox(height: 10),
             const CartInfoWidget(),
             const SizedBox(height: 13),
