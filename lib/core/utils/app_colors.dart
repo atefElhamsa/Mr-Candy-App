@@ -24,4 +24,5 @@ class AppColors {
   static const Color dontHaveAnAccount = Color(0XFF626262);
   static const Color activeSmooth = Color(0XFF5824CD);
   static const Color bestSellerColorContainer = Color(0XFFF2F5FC);
+  static const Color categories = Color(0xff6520CD);
 }

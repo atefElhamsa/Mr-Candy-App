@@ -18,8 +18,16 @@ class AppTexts {
   static const String homeMain = "الرئيسية";
   static const String retry = "حاول مرة اخرى";
   static const String homeFav = "المفضلة";
+  static const String notifications = "الاشعارات";
+  static const String language = "اللغة";
+  static const String themes = "الثيمات";
+  static const String homeProfile = "الملف الشخصى";
+  static const String homeChangePassword = "تغيير كلمة المرور";
+  static const String homeSettingPrivacy = "اعدادات الخصوصية";
   static const String homeCarts = "السلة";
   static const String homeSetting = "الاعدادات";
+  static const String homeSettingSubTitle = "اعدادات الحساب";
+  static const String homeAppSettingSubTitle = "اعدادات التطبيق";
   static const String token = "token";
   static const String payment = "دفع";
   static const String nameOfBox = "setting";

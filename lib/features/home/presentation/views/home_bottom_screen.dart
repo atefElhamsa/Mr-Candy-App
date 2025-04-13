@@ -6,6 +6,7 @@ import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/view/cart_screen.dart';
 import 'package:mr_candy/features/favourite/presentation/views/favourite_screen.dart';
 import 'package:mr_candy/features/home/presentation/views/home_main_screen.dart';
+import 'package:mr_candy/features/setting/presentation/view/setting_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomeBottomScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
     const HomeMainScreen(),
     const FavouriteScreen(),
     const CartScreen(),
-    const Icon(Icons.settings),
+    const SettingScreen(),
   ];
   @override
   Widget build(BuildContext context) {
