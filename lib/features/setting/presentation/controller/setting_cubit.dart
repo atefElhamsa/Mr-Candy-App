@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/setting/presentation/controller/setting_state.dart';
 
+import '../../../change_password/presentation/view/change_password_screen.dart';
 import '../../../profile/presentation/view/profile_page.dart';
 import '../../data/model/setting_item_model.dart';
 
@@ -28,12 +29,12 @@ class SettingCubit extends Cubit<SettingStates> {
         title: AppTexts.homeChangePassword,
         leadingIcon: Icons.lock_outline,
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => ChangePasswordScreen(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ChangePasswordScreen(),
+            ),
+          );
         },
       ),
       SettingItemModel(

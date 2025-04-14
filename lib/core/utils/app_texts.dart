@@ -53,6 +53,8 @@ class AppTexts {
   static const String textLabelPhone = "ادخل رقم الهاتف";
   static const String textLabelName = "ادخل الأسم";
   static const String textLabelPassword = "ادخل كلمة المرور";
+  static const String textLabelCurrentPassword = "ادخل كلمة المرور الحالية";
+  static const String textLabelNewPassword = "ادخل كلمة المرور الجديدة";
   static const String textLabelEmail = "ادخل البريد الألكتروني";
   static const String onboardingTitleButton3 = "ابدأ";
   static const String categoryDetail = "تفاصيل المنتج";

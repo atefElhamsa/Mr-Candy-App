@@ -6,14 +6,17 @@ import '../../../../../core/utils/app_colors.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final TextEditingController? controller;
   final String? hintText;
+  final bool? obscureText;
   const CustomTextFormField({
     super.key,
-    required this.keyboardType,
-    required this.suffixIcon,
-    required this.controller,
+    this.keyboardType,
+    this.suffixIcon,
+    this.controller,
     this.hintText,
+    this.obscureText, this.prefixIcon,
   });
 
   @override
@@ -21,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       autofocus: false,
+      obscureText: obscureText ?? false,
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.left,
       onTapOutside: (event) {
@@ -48,6 +52,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
         ),
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         hintText: hintText,
         hintStyle: GoogleFonts.almarai(
           color: AppColors.iconsFormFieldColor,

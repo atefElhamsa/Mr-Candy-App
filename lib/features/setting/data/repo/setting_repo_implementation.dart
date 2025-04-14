@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mr_candy/core/errors/failure.dart';
 import 'package:mr_candy/features/profile/data/model/profile_model.dart';
@@ -16,14 +15,10 @@ class SettingRepoImplementation implements SettingRepo {
       final token = AuthHelper.getToken();
 
       if (token == null || token.isEmpty) {
-        debugPrint("Error: Token is missing or invalid");
         return left(
           ApiFailure(message: "Authentication token is missing."),
         );
       }
-
-      debugPrint("Fetching profile with token: $token");
-
       final response = await http.get(
         Uri.parse(EndPoints.baseUrl + EndPoints.profile),
         headers: {
@@ -31,20 +26,13 @@ class SettingRepoImplementation implements SettingRepo {
           "Accept": "application/json",
         },
       );
-
-      debugPrint("Response Status: ${response.statusCode}");
-      debugPrint("Response Body: ${response.body}");
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
         if (responseBody["status"] == true) {
           final profileModel = ProfileModel.fromJson(responseBody["data"]);
           if (responseBody["data"]["token"] != token) {
             AuthHelper.saveToken(responseBody["data"]["token"]);
-            debugPrint("Token updated in Hive");
           }
-
           return right(profileModel);
         } else {
           return left(
@@ -75,7 +63,6 @@ class SettingRepoImplementation implements SettingRepo {
         ApiFailure(message: "Invalid response format"),
       );
     } catch (e) {
-      debugPrint('Error occurred: $e');
       return left(
         ApiFailure(message: "An unexpected error occurred"),
       );
@@ -91,14 +78,10 @@ class SettingRepoImplementation implements SettingRepo {
       final token = AuthHelper.getToken();
 
       if (token == null || token.isEmpty) {
-        debugPrint("Error: Token is missing or invalid");
         return left(
           ApiFailure(message: "Authentication token is missing."),
         );
       }
-
-      debugPrint("Changing password with token: $token");
-
       final response = await http.post(
         Uri.parse(EndPoints.baseUrl + EndPoints.changepassword),
         headers: {
@@ -110,12 +93,7 @@ class SettingRepoImplementation implements SettingRepo {
           "new_password": newPassword,
         },
       );
-
-      debugPrint("Response Status: ${response.statusCode}");
-      debugPrint("Response Body: ${response.body}");
-
       final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return right(
           responseBody["message"] ?? "Password changed successfully",
@@ -141,7 +119,6 @@ class SettingRepoImplementation implements SettingRepo {
         ApiFailure(message: "Invalid response format"),
       );
     } catch (e) {
-      debugPrint('Error occurred: $e');
       return left(
         ApiFailure(message: "An unexpected error occurred"),
       );
@@ -160,12 +137,8 @@ class SettingRepoImplementation implements SettingRepo {
       final token = AuthHelper.getToken();
 
       if (token == null || token.isEmpty) {
-        debugPrint("Error: Token is missing or invalid");
         return left(ApiFailure(message: "Authentication token is missing."));
       }
-
-      debugPrint("Changing password with token: $token");
-
       final response = await http.put(
         Uri.parse(EndPoints.baseUrl + EndPoints.updateProfile),
         headers: {
@@ -180,12 +153,7 @@ class SettingRepoImplementation implements SettingRepo {
           "image": image
         },
       );
-
-      debugPrint("Response Status: ${response.statusCode}");
-      debugPrint("Response Body: ${response.body}");
-
       final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return right(responseBody["message"] ?? "Edit profile successfully");
       } else if (response.statusCode == 401) {
@@ -209,7 +177,6 @@ class SettingRepoImplementation implements SettingRepo {
         ApiFailure(message: "Invalid response format"),
       );
     } catch (e) {
-      debugPrint('Error occurred: $e');
       return left(
         ApiFailure(message: "An unexpected error occurred"),
       );
