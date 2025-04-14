@@ -6,6 +6,8 @@ class AppTexts {
   static const String addFav = "تم الاضافة بنجاح";
   static const String skip = "تخطى";
   static const String delete = "حذف";
+  static const String save = "حفظ التغيرات";
+  static const String saveChange = "... يتم الحفظ";
   static const String thankYou = "Thank you!";
   static const String date = "Date";
   static const String time = "Time";
@@ -22,6 +24,7 @@ class AppTexts {
   static const String language = "اللغة";
   static const String themes = "الثيمات";
   static const String homeProfile = "الملف الشخصى";
+  static const String homeEditProfile = "تعديل الملف الشخصى";
   static const String homeChangePassword = "تغيير كلمة المرور";
   static const String homeSettingPrivacy = "اعدادات الخصوصية";
   static const String homeCarts = "السلة";

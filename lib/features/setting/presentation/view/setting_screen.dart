@@ -16,6 +16,7 @@ class SettingScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 90.h,
+          leading: const SizedBox(),
           flexibleSpace: const AppBarWidgetWithoutBack(
             name: AppTexts.homeSetting,
           ),

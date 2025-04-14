@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/setting/presentation/controller/setting_state.dart';
 
+import '../../../profile/presentation/view/profile_page.dart';
 import '../../data/model/setting_item_model.dart';
 
 class SettingCubit extends Cubit<SettingStates> {
@@ -15,12 +16,12 @@ class SettingCubit extends Cubit<SettingStates> {
         title: AppTexts.homeProfile,
         leadingIcon: CupertinoIcons.profile_circled,
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => ProfilePage(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProfilePage(),
+            ),
+          );
         },
       ),
       SettingItemModel(
