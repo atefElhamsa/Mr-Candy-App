@@ -1,5 +1,7 @@
 class AppTexts {
   static const String onboardingText1 = "موزع معتمد";
+  static const String onboardingText2 = "طلباتك كلها عندنا";
+  static const String onboardingText3 = "اطلب حاجتك بكل سهولة";
   static const String loginSuccess = "تم تسجيل الدخول بنجاح";
   static const String signUpSuccess = "تم انشاء الحساب بنجاح";
   static const String delFav = "تم الحذف بنجاح";
@@ -36,7 +38,6 @@ class AppTexts {
   static const String nameOfBox = "setting";
   static const String addPhoto = "اضف صورة شخصية";
   static const String updatePhoto = "تعديل الصورة";
-  static const String onboardingText2 = "طلباتك كلها عندنا";
   static const String onboardingTitleButton1And2 = "التالي";
   static const String errorEmail = "من فضلك ادخل البريد الألكتروني";
   static const String errorPassword = "من فضلك ادخل كلمة المرور";
@@ -57,9 +58,10 @@ class AppTexts {
   static const String textLabelNewPassword = "ادخل كلمة المرور الجديدة";
   static const String textLabelEmail = "ادخل البريد الألكتروني";
   static const String onboardingTitleButton3 = "ابدأ";
+  static const String quantity = "الكمية : ";
+  static const String totalPrice = "الاجمالى : ";
   static const String categoryDetail = "تفاصيل المنتج";
   static const String sweets = "مكسرات مشكل ابو عوف";
-  static const String onboardingText3 = "اطلب حاجتك بكل سهولة";
   static const String noInternet = "No Internet";
   static const String errorOccurred = "Error Occurred";
   static const String descriptionOnboarding =

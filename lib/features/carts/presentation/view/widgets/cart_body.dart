@@ -142,7 +142,7 @@ class _CartBodyState extends State<CartBody> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "الكمية : ",
+                                            AppTexts.quantity,
                                             style: GoogleFonts.cairo(
                                               fontSize: 30.h,
                                               color: AppColors.grey,
@@ -165,7 +165,7 @@ class _CartBodyState extends State<CartBody> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "الاجمالى : ",
+                                            AppTexts.totalPrice,
                                             style: GoogleFonts.cairo(
                                               fontSize: 30.h,
                                               color: AppColors.grey,
@@ -317,7 +317,7 @@ class _CartBodyState extends State<CartBody> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "الاجمالى : ",
+                            AppTexts.totalPrice,
                             style: GoogleFonts.cairo(
                               fontSize: 30.h,
                               color: AppColors.grey,
