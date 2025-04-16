@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_states.dart';
 
@@ -202,7 +203,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                           ),
                                           Text(
                                             maxLines: 1,
-                                            "جنيه",
+                                            AppTexts.pound,
                                             style: GoogleFonts.almarai(
                                               textStyle: TextStyle(
                                                 color: AppColors.loginAppbar1,

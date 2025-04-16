@@ -55,5 +55,16 @@
   "noInternet": "لا يوجد اتصال بالانترنت",
   "errorOccurred": "حدث خطأ",
   "quantity": "الكمية : ",
-  "totalPrice": "الاجمالى : "
+  "totalPrice": "الاجمالى : ",
+  "noProductsAvailable": "لا توجد منتجات متاحة",
+  "pound": "جنيه",
+  "noCategoriseAvailable": "لا توجد فئات متاحة",
+  "noExistedData": "لا توجد بيانات",
+  "price": "السعر: ",
+  "discount": "%الخصم: ",
+  "somethingWentWrong": "حدث خطأ ما!",
+  "name": "الاسم",
+  "email": "البريد الالكترونى",
+  "phone": "الهاتف",
+  "noBannersAvailable": "لا توجد اعلانات متاحة"
 }

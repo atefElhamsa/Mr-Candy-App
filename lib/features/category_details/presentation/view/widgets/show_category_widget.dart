@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 
 class ShowCategoryWidget extends StatefulWidget {
@@ -117,7 +118,7 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
             ),
             SizedBox(height: 20.h),
             Text(
-              "السعر: ${widget.productModel.price}",
+              "${AppTexts.price}${widget.productModel.price}",
               maxLines: 5,
               textAlign: TextAlign.end,
               style: TextStyle(
@@ -128,7 +129,7 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
             ),
             SizedBox(height: 20.h),
             Text(
-              "%الخصم: ${widget.productModel.discount}",
+              "${AppTexts.discount}${widget.productModel.discount}",
               maxLines: 5,
               textAlign: TextAlign.end,
               style: TextStyle(

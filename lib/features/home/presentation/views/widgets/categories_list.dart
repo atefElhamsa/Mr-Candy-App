@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_categories_states.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -31,8 +32,15 @@ class CategoriesList extends StatelessWidget {
           final categoriesList =
               BlocProvider.of<CategoriesCubit>(context).categoriesList;
           return categoriesList.isEmpty
-              ? const Center(
-                  child: Text("No Categorise Available"),
+              ? Center(
+                  child: Text(
+                    AppTexts.noCategoriseAvailable,
+                    style: GoogleFonts.cairo(
+                      color: AppColors.black,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 )
               : Wrap(
                   direction: Axis.horizontal,
@@ -101,7 +109,7 @@ class CategoriesList extends StatelessWidget {
         } else {
           return Center(
             child: Text(
-              "No Existed Data",
+              AppTexts.noExistedData,
               style: GoogleFonts.almarai(
                 textStyle: TextStyle(
                   color: AppColors.black,

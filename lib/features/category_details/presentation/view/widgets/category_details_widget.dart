@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
@@ -163,7 +164,7 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                         children: [
                           Text(
                             maxLines: 1,
-                            "جنيه",
+                            AppTexts.pound,
                             style: GoogleFonts.almarai(
                               textStyle: TextStyle(
                                 color: AppColors.loginAppbar1,

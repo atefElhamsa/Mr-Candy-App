@@ -12,6 +12,9 @@ class AppTexts {
   static const String saveChange = "... يتم الحفظ";
   static const String thankYou = "Thank you!";
   static const String date = "Date";
+  static const String name = "Name";
+  static const String email = "Email";
+  static const String phone = "Phone";
   static const String time = "Time";
   static const String total = "Total";
   static const String paid = "PAID";
@@ -60,6 +63,14 @@ class AppTexts {
   static const String onboardingTitleButton3 = "ابدأ";
   static const String quantity = "الكمية : ";
   static const String totalPrice = "الاجمالى : ";
+  static const String pound = "جنيه";
+  static const String price = "السعر: ";
+  static const String discount = "%الخصم: ";
+  static const String noProductsAvailable = "No Products Available";
+  static const String noBannersAvailable = "No Banners Available";
+  static const String noCategoriseAvailable = "No Categorise Available";
+  static const String noExistedData = "No Existed Data";
+  static const String somethingWentWrong = "Something went wrong!";
   static const String categoryDetail = "تفاصيل المنتج";
   static const String sweets = "مكسرات مشكل ابو عوف";
   static const String noInternet = "No Internet";

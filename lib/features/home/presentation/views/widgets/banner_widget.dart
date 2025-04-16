@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_banners_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_banners_states.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -36,8 +39,15 @@ class _BannerWidgetState extends State<BannerWidget> {
         } else if (state is BannersSuccessStates) {
           final banners = BlocProvider.of<BannersCubit>(context).banners;
           return banners.isEmpty
-              ? const Center(
-                  child: Text("No banners available"),
+              ? Center(
+                  child: Text(
+                    AppTexts.noBannersAvailable,
+                    style: GoogleFonts.cairo(
+                      color: AppColors.black,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 )
               : Stack(
                   alignment: Alignment.center,

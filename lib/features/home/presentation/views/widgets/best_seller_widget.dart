@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 
 class BestSellerWidget extends StatefulWidget {
@@ -114,14 +115,12 @@ class _BestSellerWidgetState extends State<BestSellerWidget> {
                   Padding(
                     padding: EdgeInsets.only(left: 40.w),
                     child: Text(
-                      "${widget.productModel.price}جنيه",
+                      "${widget.productModel.price}${AppTexts.pound}",
                       maxLines: 1,
                       style: GoogleFonts.almarai(
-                        textStyle: TextStyle(
                           color: AppColors.loginAppbar1,
                           fontWeight: FontWeight.w700,
                           fontSize: 20.sp,
-                        ),
                       ),
                     ),
                   ),

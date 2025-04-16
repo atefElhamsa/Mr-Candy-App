@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
@@ -12,7 +11,6 @@ import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dar
 import 'package:mr_candy/features/profile/presentation/controller/profile_cubit.dart';
 import 'package:mr_candy/features/profile/presentation/controller/profile_state.dart';
 import 'package:mr_candy/features/profile/presentation/view/widgets/profile_avatar.dart';
-
 import '../../../data/model/profile_model.dart';
 import 'custom_text_form_field.dart';
 
@@ -110,21 +108,21 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: nameController,
-                hintText: "Name",
+                hintText: AppTexts.name,
                 keyboardType: TextInputType.text,
                 suffixIcon: null,
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: emailController,
-                hintText: "Email",
+                hintText: AppTexts.email,
                 keyboardType: TextInputType.emailAddress,
                 suffixIcon: null,
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: phoneController,
-                hintText: "Phone",
+                hintText: AppTexts.phone,
                 keyboardType: TextInputType.phone,
                 suffixIcon: null,
               ),

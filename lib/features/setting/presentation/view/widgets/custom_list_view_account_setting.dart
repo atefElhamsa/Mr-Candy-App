@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/setting/presentation/controller/setting_cubit.dart';
 import 'package:mr_candy/features/setting/presentation/controller/setting_state.dart';
 import 'package:mr_candy/features/setting/presentation/view/widgets/share_list_tile.dart';
@@ -59,8 +60,15 @@ class CustomListViewAccountSetting extends StatelessWidget {
             ),
           );
         } else {
-          return const Center(
-            child: Text("Something went wrong!"),
+          return Center(
+            child: Text(
+              AppTexts.somethingWentWrong,
+              style: GoogleFonts.cairo(
+                color: AppColors.black,
+                fontWeight: FontWeight.w700,
+                fontSize: 25.sp,
+              ),
+            ),
           );
         }
       },

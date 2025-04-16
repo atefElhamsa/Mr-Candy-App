@@ -325,7 +325,7 @@ class _CartBodyState extends State<CartBody> {
                             ),
                           ),
                           Text(
-                            "${sum()}ج",
+                            "${sum()}",
                             style: GoogleFonts.cairo(
                               fontSize: 30.h,
                               color: AppColors.loginAppbar3,

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
+import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/features/category_details/presentation/view/show_category_screen.dart';
 import 'package:mr_candy/features/category_details/presentation/view/widgets/category_details_widget.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_states.dart';
+
+import '../../../../../core/utils/app_texts.dart';
 
 class CategoryDetailsList extends StatefulWidget {
   const CategoryDetailsList({super.key, required this.id});
@@ -40,8 +45,15 @@ class _CategoryDetailsListState extends State<CategoryDetailsList> {
           var categoriesDetailsList =
               BlocProvider.of<CategoryDetailsCubit>(context).categoryDetails;
           return categoriesDetailsList.isEmpty
-              ? const Center(
-                  child: Text("No Category Available"),
+              ? Center(
+                  child: Text(
+                    AppTexts.noCategoriseAvailable,
+                    style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.black,
+                      fontSize: 25.sp,
+                    ),
+                  ),
                 )
               : GridView.builder(
                   shrinkWrap: true,
