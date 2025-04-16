@@ -31,6 +31,7 @@ class AppTexts {
   static const String homeProfile = "الملف الشخصى";
   static const String homeEditProfile = "تعديل الملف الشخصى";
   static const String homeChangePassword = "تغيير كلمة المرور";
+  static const String homeChangeLanguage = "تغيير اللغة";
   static const String homeSettingPrivacy = "اعدادات الخصوصية";
   static const String homeCarts = "السلة";
   static const String homeSetting = "الاعدادات";

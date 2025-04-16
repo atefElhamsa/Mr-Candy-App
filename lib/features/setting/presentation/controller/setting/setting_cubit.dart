@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
-import 'package:mr_candy/features/setting/presentation/controller/setting_state.dart';
+import 'package:mr_candy/features/setting/presentation/controller/setting/setting_state.dart';
 
-import '../../../change_password/presentation/view/change_password_screen.dart';
-import '../../../profile/presentation/view/profile_page.dart';
-import '../../data/model/setting_item_model.dart';
+import '../../../../change_password/presentation/view/change_password_screen.dart';
+import '../../../../profile/presentation/view/profile_page.dart';
+import '../../../data/model/setting_item_model.dart';
+import '../../view/language_page.dart';
 
 class SettingCubit extends Cubit<SettingStates> {
   SettingCubit() : super(SettingInitialState());
@@ -54,12 +55,12 @@ class SettingCubit extends Cubit<SettingStates> {
         title: AppTexts.language,
         leadingIcon: Icons.language,
         onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => LanguagePage(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LanguagePage(),
+            ),
+          );
         },
       ),
       SettingItemModel(

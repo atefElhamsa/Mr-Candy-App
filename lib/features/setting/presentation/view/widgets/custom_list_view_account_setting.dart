@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
-import 'package:mr_candy/features/setting/presentation/controller/setting_cubit.dart';
-import 'package:mr_candy/features/setting/presentation/controller/setting_state.dart';
+import 'package:mr_candy/features/setting/presentation/controller/setting/setting_cubit.dart';
+import 'package:mr_candy/features/setting/presentation/controller/setting/setting_state.dart';
 import 'package:mr_candy/features/setting/presentation/view/widgets/share_list_tile.dart';
 
 import '../../../../../core/utils/app_colors.dart';

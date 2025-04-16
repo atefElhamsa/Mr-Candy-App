@@ -6,8 +6,8 @@ import 'package:mr_candy/features/setting/presentation/view/widgets/share_list_t
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_texts.dart';
-import '../../controller/setting_cubit.dart';
-import '../../controller/setting_state.dart';
+import '../../controller/setting/setting_cubit.dart';
+import '../../controller/setting/setting_state.dart';
 
 class CustomListViewAppSetting extends StatelessWidget {
   const CustomListViewAppSetting({super.key});

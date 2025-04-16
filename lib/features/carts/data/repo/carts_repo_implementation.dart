@@ -14,6 +14,8 @@ import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart'
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
 
 class CartRepoImplementation implements CartRepo {
+
+
   int totalPrice = 0;
 
   @override

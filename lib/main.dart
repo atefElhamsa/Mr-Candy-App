@@ -8,10 +8,13 @@ import 'package:mr_candy/core/extensions/api_keys.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
+import 'package:mr_candy/features/setting/presentation/controller/language/language_cubit.dart';
 import 'package:mr_candy/features/splash/presentation/views/splash_screen.dart';
 import 'features/home/presentation/controller/get_banners_cubit.dart';
 import 'features/home/presentation/controller/get_best_seller_product_cubit.dart';
 import 'features/home/presentation/controller/get_categories_cubit.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +53,9 @@ void main() async {
           BlocProvider(
             create: (context) => CartCubit(),
           ),
+          BlocProvider(
+            create: (context) => LanguageCubit(),
+          ),
         ],
         child: const MyApp(),
       ),
@@ -84,10 +90,14 @@ class _MyAppState extends State<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return const MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "Mr Candy",
-          home: SplashScreen(),
+          navigatorKey: navigatorKey,
+          localizationsDelegates: context.localizationDelegates,
+          locale: context.locale,
+          supportedLocales: context.supportedLocales,
+          home: const SplashScreen(),
         );
       },
     );
