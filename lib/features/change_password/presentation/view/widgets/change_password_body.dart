@@ -23,6 +23,7 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
   final TextEditingController _newPasswordController = TextEditingController();
   bool _obscureCurrentPassword = true;
   bool _obscureNewPassword = true;
+  var newPasswordNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,10 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
               ),
               CustomTextFormField(
                 keyboardType: TextInputType.visiblePassword,
-                prefixIcon: IconButton(
+                onFieldSubmitted: (p0) {
+                  FocusScope.of(context).requestFocus(newPasswordNode);
+                },
+                suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
                       _obscureCurrentPassword = !_obscureCurrentPassword;
@@ -93,7 +97,11 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
               ),
               CustomTextFormField(
                 keyboardType: TextInputType.visiblePassword,
-                prefixIcon: IconButton(
+                focusNode: newPasswordNode,
+                onFieldSubmitted: (p0) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
                       _obscureNewPassword = !_obscureNewPassword;

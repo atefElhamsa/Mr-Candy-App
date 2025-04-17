@@ -1,9 +1,6 @@
 import 'dart:ui' as ui;
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../core/utils/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -13,24 +10,31 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
   final bool? obscureText;
-  const CustomTextFormField({
+  final FocusNode? focusNode;
+  void Function(String)? onFieldSubmitted;
+  CustomTextFormField({
     super.key,
     this.keyboardType,
     this.suffixIcon,
     this.controller,
     this.hintText,
-    this.obscureText, this.prefixIcon,
+    this.obscureText,
+    this.prefixIcon,
+    this.focusNode,
+    this.onFieldSubmitted,
   });
 
   @override
   Widget build(BuildContext context) {
-    bool isArabic = context.locale.languageCode == "ar";
+    bool isRTL = Directionality.of(context) == ui.TextDirection.rtl;
     return TextFormField(
+      textDirection: isRTL ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+      textAlign: isRTL ? TextAlign.right : TextAlign.left,
       controller: controller,
       autofocus: false,
       obscureText: obscureText ?? false,
-      textDirection: ui.TextDirection.ltr,
-      textAlign: isArabic ? TextAlign.right : TextAlign.left,
+      focusNode: focusNode,
+      onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },

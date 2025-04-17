@@ -7,7 +7,6 @@ import 'package:mr_candy/core/shared_widgets/custom_appbar.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/shared_widgets/custom_field.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dart';
 import 'package:mr_candy/features/login/presentation/controller/login_cubit.dart';
 import 'package:mr_candy/features/login/presentation/controller/login_states.dart';
@@ -75,6 +74,7 @@ class _LoginBodyState extends State<LoginBody> {
                             ),
                             CustomField(
                               keyboardType: TextInputType.emailAddress,
+                              obscureText: false,
                               hintTitle: "textLabelEmail".tr(),
                               iconData: Icons.email_outlined,
                               errorMessage: "errorEmail".tr(),
@@ -90,6 +90,7 @@ class _LoginBodyState extends State<LoginBody> {
                             ),
                             CustomField(
                               keyboardType: TextInputType.visiblePassword,
+                              obscureText: true,
                               hintTitle: "textLabelPassword".tr(),
                               iconData: Icons.lock_outline_rounded,
                               errorMessage: "errorPassword".tr(),

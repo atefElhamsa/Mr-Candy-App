@@ -1,11 +1,9 @@
 import 'dart:ui' as ui;
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/profile/presentation/controller/profile_cubit.dart';
 import 'package:mr_candy/features/profile/presentation/controller/profile_state.dart';
 import 'package:mr_candy/features/profile/presentation/view/edit_profile.dart';

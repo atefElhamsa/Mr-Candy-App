@@ -28,6 +28,9 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
   late TextEditingController phoneController;
   String? uploadedImageUrl;
 
+  var emailNode = FocusNode();
+  var phoneNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -107,6 +110,9 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
+                onFieldSubmitted: (p0) {
+                  FocusScope.of(context).requestFocus(emailNode);
+                },
                 controller: nameController,
                 hintText: "name".tr(),
                 keyboardType: TextInputType.text,
@@ -114,6 +120,10 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
+                focusNode: emailNode,
+                onFieldSubmitted: (p0) {
+                  FocusScope.of(context).requestFocus(phoneNode);
+                },
                 controller: emailController,
                 hintText: "email".tr(),
                 keyboardType: TextInputType.emailAddress,
@@ -121,6 +131,10 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
+                focusNode: phoneNode,
+                onFieldSubmitted: (p0) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
                 controller: phoneController,
                 hintText: "phone".tr(),
                 keyboardType: TextInputType.phone,

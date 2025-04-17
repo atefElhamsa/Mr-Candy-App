@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
@@ -14,6 +13,7 @@ class CustomField extends StatelessWidget {
     required this.controller,
     this.focusNode,
     this.onFieldSubmitted,
+    required this.obscureText,
   });
 
   final TextInputType keyboardType;
@@ -23,6 +23,7 @@ class CustomField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;
   void Function(String)? onFieldSubmitted;
+  bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class CustomField extends StatelessWidget {
       textDirection: isRTL ? ui.TextDirection.ltr :ui.TextDirection.rtl,
       textAlign: isRTL ? TextAlign.left : TextAlign.right,
       focusNode: focusNode,
+      obscureText: obscureText,
       onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();

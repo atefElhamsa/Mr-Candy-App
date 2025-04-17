@@ -163,6 +163,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                             ),
                             CustomField(
                               keyboardType: TextInputType.name,
+                              obscureText: false,
                               hintTitle: "textLabelName".tr(),
                               iconData: Icons.person_outline_outlined,
                               errorMessage: "errorName".tr(),
@@ -178,6 +179,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                             ),
                             CustomField(
                               keyboardType: TextInputType.emailAddress,
+                              obscureText: false,
                               hintTitle: "textLabelEmail".tr(),
                               iconData: Icons.email_outlined,
                               errorMessage: "errorEmail".tr(),
@@ -194,6 +196,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                             ),
                             CustomField(
                               keyboardType: TextInputType.phone,
+                              obscureText: false,
                               hintTitle: "textLabelPhone".tr(),
                               iconData: Icons.phone_in_talk_rounded,
                               errorMessage: "errorPhone".tr(),
@@ -210,6 +213,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                             ),
                             CustomField(
                               keyboardType: TextInputType.visiblePassword,
+                              obscureText: false,
                               hintTitle: "textLabelPassword".tr(),
                               iconData: Icons.lock_outline_rounded,
                               errorMessage: "errorPassword".tr(),
