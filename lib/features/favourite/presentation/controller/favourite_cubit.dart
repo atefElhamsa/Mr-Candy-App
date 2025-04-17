@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/favourite/data/model/favourite_model.dart';
 import 'package:mr_candy/features/favourite/data/repo/favourite_repo_implementation.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_states.dart';
@@ -55,7 +55,7 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 1),
             content: Text(
-              AppTexts.addFav,
+              "addFav".tr(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.h,
@@ -91,7 +91,7 @@ class FavouriteCubit extends Cubit<FavouritesStates> {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             behavior: SnackBarBehavior.floating,
             content: Text(
-              AppTexts.delFav,
+              "delFav".tr(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.h,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,6 @@ import 'package:mr_candy/features/carts/data/model/cart_model.dart';
 import 'package:mr_candy/features/carts/data/repo/carts_repo_implementation.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_states.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_texts.dart';
 
 class CartCubit extends Cubit<CartStates> {
   CartCubit() : super(CartInitialState());
@@ -52,7 +52,7 @@ class CartCubit extends Cubit<CartStates> {
             behavior: SnackBarBehavior.floating,
             duration: const Duration(seconds: 1),
             content: Text(
-              AppTexts.addFav,
+              "addToCart".tr(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.h,
@@ -85,7 +85,7 @@ class CartCubit extends Cubit<CartStates> {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             behavior: SnackBarBehavior.floating,
             content: Text(
-              AppTexts.delFav,
+              "delFromCart".tr(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.h,
