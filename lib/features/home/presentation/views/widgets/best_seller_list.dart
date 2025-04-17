@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_best_seller_product_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_best_seller_product_states.dart';
 import 'package:mr_candy/features/home/presentation/views/widgets/best_seller_widget.dart';
@@ -36,7 +36,7 @@ class BestSellerList extends StatelessWidget {
           return productsList.isEmpty
               ? Center(
                   child: Text(
-                    AppTexts.noProductsAvailable,
+                    "noProductsAvailable".tr(),
                     style: GoogleFonts.cairo(
                       color: AppColors.black,
                       fontWeight: FontWeight.w700,

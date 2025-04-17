@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -11,10 +12,15 @@ import 'package:mr_candy/features/favourite/data/repo/favourite_repo.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import '../../../../core/utils/app_texts.dart';
 import 'package:http/http.dart' as http;
+import '../../../../main.dart';
 import '../../../home/data/models/product_model.dart';
 import '../../../home/presentation/controller/get_category_details_cubit.dart';
 
 class FavouriteRepoImplementation implements FavouriteRepo {
+  String get currentLanguage =>
+      EasyLocalization.of(navigatorKey.currentContext!)?.locale.languageCode ??
+      "ar";
+
   @override
   Future<Either<Failure, List<FavouriteItemModel>>> getFavourite() async {
     List<FavouriteItemModel> favouriteList = [];
@@ -24,7 +30,7 @@ class FavouriteRepoImplementation implements FavouriteRepo {
         Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
         headers: {
           "Authorization": "$token",
-          "lang": "ar",
+          "lang": currentLanguage,
         },
       );
       if (response.statusCode == 200) {
@@ -132,7 +138,7 @@ class FavouriteRepoImplementation implements FavouriteRepo {
         Uri.parse(EndPoints.baseUrl + EndPoints.favorites),
         headers: {
           "Authorization": "$token",
-          "lang": "ar",
+          "lang": currentLanguage,
         },
         body: body,
       );

@@ -10,6 +10,7 @@ import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart'
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/setting/presentation/controller/language/language_cubit.dart';
 import 'package:mr_candy/features/splash/presentation/views/splash_screen.dart';
+import 'package:mr_candy/mrcandy_cubit.dart';
 import 'features/home/presentation/controller/get_banners_cubit.dart';
 import 'features/home/presentation/controller/get_best_seller_product_cubit.dart';
 import 'features/home/presentation/controller/get_categories_cubit.dart';
@@ -22,6 +23,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(AppTexts.nameOfBox);
   await ScreenUtil.ensureScreenSize();
+  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(
@@ -97,7 +99,7 @@ class _MyAppState extends State<MyApp> {
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           supportedLocales: context.supportedLocales,
-          home: const SplashScreen(),
+          home:  const SplashScreen(),
         );
       },
     );

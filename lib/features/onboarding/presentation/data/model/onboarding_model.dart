@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 
@@ -18,20 +19,20 @@ class OnboardingModel {
 List<OnboardingModel> onboardings = [
   OnboardingModel(
     image: AppImages.onboardingImage1,
-    title: AppTexts.onboardingText1,
-    description: AppTexts.descriptionOnboarding,
-    titleButton: AppTexts.onboardingTitleButton1And2,
+    title: "onboardingText1".tr(),
+    description: "descriptionOnboarding".tr(),
+    titleButton: "onboardingTitleButton1And2".tr(),
   ),
   OnboardingModel(
     image: AppImages.onboardingImage2,
-    title: AppTexts.onboardingText2,
-    description: AppTexts.descriptionOnboarding,
-    titleButton: AppTexts.onboardingTitleButton1And2,
+    title: "onboardingText2".tr(),
+    description: "descriptionOnboarding".tr(),
+    titleButton: "onboardingTitleButton1And2".tr(),
   ),
   OnboardingModel(
     image: AppImages.onboardingImage3,
-    title: AppTexts.onboardingText3,
-    description: AppTexts.descriptionOnboarding,
-    titleButton: AppTexts.onboardingTitleButton3,
+    title: "onboardingText3".tr(),
+    description: "descriptionOnboarding".tr(),
+    titleButton: "onboardingTitleButton3".tr(),
   ),
 ];

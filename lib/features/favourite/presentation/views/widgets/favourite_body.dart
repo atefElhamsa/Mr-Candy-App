@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_states.dart';
 
@@ -28,6 +28,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return BlocBuilder<FavouriteCubit, FavouritesStates>(
       builder: (context, state) {
         if (state is FavouritesLoadingStates) {
@@ -126,7 +127,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                             BorderRadius.circular(4.r),
                                       ),
                                       child: Text(
-                                        "-${favouriteList[index].productModel.discount}%",
+                                        "${favouriteList[index].productModel.discount}%",
                                         style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
                                             color: AppColors.white,
@@ -166,7 +167,9 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(left: 19.w),
+                                      padding: isArabic
+                                          ? EdgeInsets.only(left: 19.w)
+                                          : EdgeInsets.only(right: 0.w),
                                       child: Text(
                                         favouriteList[index]
                                             .productModel
@@ -184,7 +187,9 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(left: 40.w),
+                                      padding: isArabic
+                                          ? EdgeInsets.only(left: 40.w)
+                                          : EdgeInsets.only(right: 20.w),
                                       child: Row(
                                         children: [
                                           Text(
@@ -194,22 +199,18 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                                 .price
                                                 .toString(),
                                             style: GoogleFonts.almarai(
-                                              textStyle: TextStyle(
-                                                color: AppColors.loginAppbar1,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 17.sp,
-                                              ),
+                                              color: AppColors.loginAppbar1,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 17.sp,
                                             ),
                                           ),
                                           Text(
                                             maxLines: 1,
-                                            AppTexts.pound,
+                                            "pound".tr(),
                                             style: GoogleFonts.almarai(
-                                              textStyle: TextStyle(
-                                                color: AppColors.loginAppbar1,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 17.sp,
-                                              ),
+                                              color: AppColors.loginAppbar1,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 17.sp,
                                             ),
                                           ),
                                         ],
@@ -219,8 +220,10 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                 ),
                                 const Spacer(),
                                 Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 4.w, bottom: 12.h),
+                                  padding: EdgeInsets.only(
+                                    left: 4.w,
+                                    bottom: 12.h,
+                                  ),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.buttonColor2,

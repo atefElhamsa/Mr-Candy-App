@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
@@ -15,10 +16,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return SizedBox(
       height: 70.h,
       child: ListView.builder(
-        reverse: true,
+        reverse: isArabic ? true : false,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(

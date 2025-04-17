@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/change_password/presentation/controller/change_password_cubit.dart';
 import 'package:mr_candy/features/change_password/presentation/controller/change_password_state.dart';
 import 'package:mr_candy/features/profile/presentation/view/widgets/custom_text_form_field.dart';
@@ -67,8 +67,8 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 25),
-              const CustomSettingTitle(
-                title: AppTexts.textLabelCurrentPassword,
+              CustomSettingTitle(
+                title: "textLabelCurrentPassword".tr(),
               ),
               CustomTextFormField(
                 keyboardType: TextInputType.visiblePassword,
@@ -88,8 +88,8 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
                 controller: _currentPasswordController,
               ),
               const SizedBox(height: 30),
-              const CustomSettingTitle(
-                title: AppTexts.textLabelNewPassword,
+              CustomSettingTitle(
+                title: "textLabelNewPassword".tr(),
               ),
               CustomTextFormField(
                 keyboardType: TextInputType.visiblePassword,
@@ -122,8 +122,8 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
                                 );
                           },
                     titleButton: state is ChangePasswordLoadingState
-                        ? AppTexts.saveChange
-                        : AppTexts.homeChangePassword,
+                        ? "saveChange".tr()
+                        : "homeChangePassword".tr(),
                   ),
                 ),
               ),

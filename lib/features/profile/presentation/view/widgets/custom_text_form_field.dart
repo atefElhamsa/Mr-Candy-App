@@ -1,3 +1,6 @@
+import 'dart:ui' as ui;
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,12 +24,13 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return TextFormField(
       controller: controller,
       autofocus: false,
       obscureText: obscureText ?? false,
-      textDirection: TextDirection.ltr,
-      textAlign: TextAlign.left,
+      textDirection: ui.TextDirection.ltr,
+      textAlign: isArabic ? TextAlign.right : TextAlign.left,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },

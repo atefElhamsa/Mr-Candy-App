@@ -1,8 +1,9 @@
+import 'dart:ui' as ui;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/view/cart_screen.dart';
 import 'package:mr_candy/features/favourite/presentation/views/favourite_screen.dart';
 import 'package:mr_candy/features/home/presentation/views/home_main_screen.dart';
@@ -26,8 +27,9 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
       child: Scaffold(
         bottomNavigationBar: SizedBox(
           height: 75.h,
@@ -48,19 +50,19 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
               items: [
                 SalomonBottomBarItem(
                   icon: Icon(CupertinoIcons.house_fill, size: 25.sp),
-                  title: const Text(AppTexts.homeMain),
+                  title: Text("homeMain".tr()),
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(CupertinoIcons.heart, size: 25.sp),
-                  title: const Text(AppTexts.homeFav),
+                  title: Text("homeFav".tr()),
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(CupertinoIcons.bag, size: 25.sp),
-                  title: const Text(AppTexts.homeCarts),
+                  title: Text("homeCarts".tr()),
                 ),
                 SalomonBottomBarItem(
                   icon: Icon(Icons.settings, size: 25.sp),
-                  title: const Text(AppTexts.homeSetting),
+                  title: Text("homeSetting".tr()),
                 ),
               ],
             ),

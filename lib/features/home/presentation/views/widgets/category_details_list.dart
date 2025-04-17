@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,6 @@ import 'package:mr_candy/features/category_details/presentation/view/widgets/cat
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_states.dart';
 
-import '../../../../../core/utils/app_texts.dart';
 
 class CategoryDetailsList extends StatefulWidget {
   const CategoryDetailsList({super.key, required this.id});
@@ -31,6 +31,7 @@ class _CategoryDetailsListState extends State<CategoryDetailsList> {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return BlocBuilder<CategoryDetailsCubit, CategoryDetailsStates>(
       builder: (context, state) {
         if (state is CategoryDetailsLoadingStates) {
@@ -47,7 +48,7 @@ class _CategoryDetailsListState extends State<CategoryDetailsList> {
           return categoriesDetailsList.isEmpty
               ? Center(
                   child: Text(
-                    AppTexts.noCategoriseAvailable,
+                    "noCategoryAvailable".tr(),
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
                       color: AppColors.black,

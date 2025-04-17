@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/login/presentation/views/login_screen.dart';
 import 'package:mr_candy/features/onboarding/presentation/data/model/onboarding_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -49,7 +49,7 @@ class _OnboardingBodyState extends State<OnboardingBody> {
                       );
                     },
                     child: Text(
-                      index == onboardings.length - 1 ? "" : AppTexts.skip,
+                      index == onboardings.length - 1 ? "" : "skip".tr(),
                       style: GoogleFonts.almarai(
                         textStyle: TextStyle(
                           color: AppColors.white,

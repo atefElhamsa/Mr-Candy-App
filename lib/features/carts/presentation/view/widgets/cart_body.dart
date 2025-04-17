@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,6 @@ import 'package:lottie/lottie.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_states.dart';
 import 'package:mr_candy/features/carts/presentation/view/widgets/payment_method_bottom_sheet.dart';
@@ -40,6 +40,7 @@ class _CartBodyState extends State<CartBody> {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return BlocBuilder<CartCubit, CartStates>(
       builder: (context, state) {
         if (state is CartLoadingState) {
@@ -93,7 +94,9 @@ class _CartBodyState extends State<CartBody> {
                                 child: Column(
                                   children: [
                                     Align(
-                                      alignment: Alignment.topRight,
+                                      alignment: isArabic
+                                          ? Alignment.topRight
+                                          : Alignment.topLeft,
                                       child: GestureDetector(
                                         onTap: () {
                                           BlocProvider.of<CartCubit>(context)
@@ -104,14 +107,23 @@ class _CartBodyState extends State<CartBody> {
                                           width: 50.w,
                                           decoration: BoxDecoration(
                                             color: AppColors.red,
-                                            borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20.r),
-                                              bottomLeft: Radius.circular(20.r),
-                                            ),
+                                            borderRadius: isArabic
+                                                ? BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(20.r),
+                                                    bottomLeft:
+                                                        Radius.circular(20.r),
+                                                  )
+                                                : BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(20.r),
+                                                    bottomRight:
+                                                        Radius.circular(20.r),
+                                                  ),
                                           ),
                                           child: Center(
                                             child: Text(
-                                              AppTexts.delete,
+                                              "delete".tr(),
                                               style: GoogleFonts.cairo(
                                                 fontSize: 15.sp,
                                                 color: AppColors.white,
@@ -123,10 +135,15 @@ class _CartBodyState extends State<CartBody> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                        right: 45.w,
-                                        left: 150.w,
-                                      ),
+                                      padding: isArabic
+                                          ? EdgeInsets.only(
+                                              right: 45.w,
+                                              left: 150.w,
+                                            )
+                                          : EdgeInsets.only(
+                                              right: 150.w,
+                                              left: 45.w,
+                                            ),
                                       child: Text(
                                         cartItems[index].productModel.name,
                                         maxLines: 1,
@@ -138,11 +155,13 @@ class _CartBodyState extends State<CartBody> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(right: 44.w),
+                                      padding: isArabic
+                                          ? EdgeInsets.only(right: 44.w)
+                                          : EdgeInsets.only(left: 44.w),
                                       child: Row(
                                         children: [
                                           Text(
-                                            AppTexts.quantity,
+                                            "quantity".tr(),
                                             style: GoogleFonts.cairo(
                                               fontSize: 30.h,
                                               color: AppColors.grey,
@@ -161,11 +180,13 @@ class _CartBodyState extends State<CartBody> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(right: 44.w),
+                                      padding: isArabic
+                                          ? EdgeInsets.only(right: 44.w)
+                                          : EdgeInsets.only(left: 44.w),
                                       child: Row(
                                         children: [
                                           Text(
-                                            AppTexts.totalPrice,
+                                            "totalPrice".tr(),
                                             style: GoogleFonts.cairo(
                                               fontSize: 30.h,
                                               color: AppColors.grey,
@@ -173,7 +194,7 @@ class _CartBodyState extends State<CartBody> {
                                             ),
                                           ),
                                           Text(
-                                            "${cartItems[index].productModel.price * cartItems[index].quantity}ج",
+                                            "${cartItems[index].productModel.price * cartItems[index].quantity}${"pound".tr()}",
                                             style: GoogleFonts.cairo(
                                               fontSize: 30.h,
                                               color: AppColors.loginAppbar3,
@@ -268,7 +289,7 @@ class _CartBodyState extends State<CartBody> {
                               ),
                               Positioned(
                                 top: 30.h,
-                                right: 250.w,
+                                right: isArabic ? 250.w : 10.w,
                                 child: CachedNetworkImage(
                                   imageUrl: cartItems[index].productModel.image,
                                   height:
@@ -317,7 +338,7 @@ class _CartBodyState extends State<CartBody> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppTexts.totalPrice,
+                            "totalPrice".tr(),
                             style: GoogleFonts.cairo(
                               fontSize: 30.h,
                               color: AppColors.grey,
@@ -325,7 +346,7 @@ class _CartBodyState extends State<CartBody> {
                             ),
                           ),
                           Text(
-                            "${sum()}",
+                            "${sum()}${"pound".tr()}",
                             style: GoogleFonts.cairo(
                               fontSize: 30.h,
                               color: AppColors.loginAppbar3,
@@ -346,7 +367,7 @@ class _CartBodyState extends State<CartBody> {
                       child: SizedBox(
                         width: double.infinity,
                         child: CustomButton(
-                          titleButton: AppTexts.sure,
+                          titleButton: "sure".tr(),
                           onTap: () {
                             showModalBottomSheet(
                               context: context,

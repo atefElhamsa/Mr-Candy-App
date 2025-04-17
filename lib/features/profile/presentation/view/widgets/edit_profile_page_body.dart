@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/shared_widgets/app_bar_widget.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/presentation/views/home_bottom_screen.dart';
 import 'package:mr_candy/features/profile/presentation/controller/profile_cubit.dart';
 import 'package:mr_candy/features/profile/presentation/controller/profile_state.dart';
@@ -86,7 +86,7 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
         appBar: AppBar(
           toolbarHeight: 90.h,
           leading: const SizedBox(),
-          flexibleSpace: const AppBarWidget(name: AppTexts.homeEditProfile),
+          flexibleSpace: AppBarWidget(name: "homeEditProfile".tr()),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -108,21 +108,21 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: nameController,
-                hintText: AppTexts.name,
+                hintText: "name".tr(),
                 keyboardType: TextInputType.text,
                 suffixIcon: null,
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: emailController,
-                hintText: AppTexts.email,
+                hintText: "email".tr(),
                 keyboardType: TextInputType.emailAddress,
                 suffixIcon: null,
               ),
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: phoneController,
-                hintText: AppTexts.phone,
+                hintText: "phone".tr(),
                 keyboardType: TextInputType.phone,
                 suffixIcon: null,
               ),
@@ -142,8 +142,8 @@ class _EditProfilePageBodyState extends State<EditProfilePageBody> {
                                 );
                           },
                     titleButton: state is EditProfileLoadingState
-                        ? AppTexts.saveChange
-                        : AppTexts.save,
+                        ? "saveChange".tr()
+                        : "save".tr(),
                   );
                 },
               ),

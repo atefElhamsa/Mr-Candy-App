@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
@@ -19,6 +20,7 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -60,6 +62,7 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
               height: 80.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
+                reverse: isArabic ? false : true,
                 itemCount: widget.productModel.images.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
@@ -118,7 +121,7 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
             ),
             SizedBox(height: 20.h),
             Text(
-              "${AppTexts.price}${widget.productModel.price}",
+              "${"price".tr()}${widget.productModel.price}",
               maxLines: 5,
               textAlign: TextAlign.end,
               style: TextStyle(
@@ -129,7 +132,9 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
             ),
             SizedBox(height: 20.h),
             Text(
-              "${AppTexts.discount}${widget.productModel.discount}",
+              isArabic
+                  ? "${"discount".tr()}${widget.productModel.discount}"
+                  : "${"discount".tr()}${widget.productModel.discount}%",
               maxLines: 5,
               textAlign: TextAlign.end,
               style: TextStyle(

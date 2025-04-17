@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,9 +13,12 @@ import 'package:mr_candy/features/carts/data/repo/carts_repo.dart';
 import 'package:http/http.dart' as http;
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
+import 'package:mr_candy/main.dart';
 
 class CartRepoImplementation implements CartRepo {
-
+  String get currentLanguage =>
+      EasyLocalization.of(navigatorKey.currentContext!)?.locale.languageCode ??
+      "ar";
 
   int totalPrice = 0;
 
@@ -37,7 +41,7 @@ class CartRepoImplementation implements CartRepo {
         Uri.parse(EndPoints.baseUrl + EndPoints.carts),
         headers: {
           "Authorization": "$token",
-          "lang": "ar",
+          "lang": currentLanguage,
         },
         body: body,
       );
@@ -74,7 +78,7 @@ class CartRepoImplementation implements CartRepo {
         Uri.parse(EndPoints.baseUrl + EndPoints.carts),
         headers: {
           "Authorization": "$token",
-          "lang": "ar",
+          "lang": currentLanguage,
         },
       );
       if (response.statusCode == 200) {

@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
+import 'dart:ui' as ui;
 
 class CustomField extends StatelessWidget {
   CustomField({
@@ -24,9 +26,10 @@ class CustomField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isRTL = Directionality.of(context) == ui.TextDirection.rtl;
     return TextFormField(
-      textDirection: TextDirection.rtl,
-      textAlign: TextAlign.right,
+      textDirection: isRTL ? ui.TextDirection.ltr :ui.TextDirection.rtl,
+      textAlign: isRTL ? TextAlign.left : TextAlign.right,
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
       onTapOutside: (event) {
@@ -36,12 +39,10 @@ class CustomField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintTitle,
         hintStyle: GoogleFonts.almarai(
-          textStyle: TextStyle(
             color: AppColors.iconsFormFieldColor,
             fontWeight: FontWeight.w600,
             fontSize: MediaQuery.of(context).size.height * 0.02,
           ),
-        ),
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

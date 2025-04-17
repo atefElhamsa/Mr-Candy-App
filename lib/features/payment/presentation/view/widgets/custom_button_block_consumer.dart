@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/payment/data/model/payment_intent_input_model.dart';
 import 'package:mr_candy/features/payment/presentation/controller/payment_cubit.dart';
@@ -12,7 +12,11 @@ import 'package:mr_candy/features/payment/presentation/view/thank_you_screen.dar
 import '../../../../../core/utils/app_colors.dart';
 
 class CustomButtonBlockConsumer extends StatefulWidget {
-  const CustomButtonBlockConsumer({super.key, required this.isLoading, required this.totalPrice});
+  const CustomButtonBlockConsumer({
+    super.key,
+    required this.isLoading,
+    required this.totalPrice,
+  });
   final bool isLoading;
   final num totalPrice;
 
@@ -30,7 +34,9 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ThankYouScreen(totalPrice: widget.totalPrice,),
+              builder: (context) => ThankYouScreen(
+                totalPrice: widget.totalPrice,
+              ),
             ),
           );
         }
@@ -72,7 +78,7 @@ class _CustomButtonBlockConsumerState extends State<CustomButtonBlockConsumer> {
               setState(() => widget.isLoading);
             },
             loading: state is PaymentLoadingState ? true : false,
-            titleButton: AppTexts.sure,
+            titleButton: "sure".tr(),
           ),
         );
       },

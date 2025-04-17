@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
@@ -26,6 +26,7 @@ class CategoryDetailsWidget extends StatefulWidget {
 class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(
@@ -54,13 +55,11 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                         borderRadius: BorderRadius.circular(4.r),
                       ),
                       child: Text(
-                        "-${widget.productModel.discount}%",
+                        "${widget.productModel.discount}%",
                         style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12.sp,
-                          ),
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ),
@@ -144,7 +143,9 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 19.w),
+                      padding: isArabic
+                          ? EdgeInsets.only(left: 19.w)
+                          : EdgeInsets.only(right: 30.w),
                       child: Text(
                         widget.productModel.name.substring(0, 15),
                         maxLines: 1,
@@ -159,18 +160,18 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 40.w),
+                      padding: isArabic
+                          ? EdgeInsets.only(left: 40.w)
+                          : EdgeInsets.only(right: 50.w),
                       child: Row(
                         children: [
                           Text(
                             maxLines: 1,
-                            AppTexts.pound,
+                            "pound".tr(),
                             style: GoogleFonts.almarai(
-                              textStyle: TextStyle(
-                                color: AppColors.loginAppbar1,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17.sp,
-                              ),
+                              color: AppColors.loginAppbar1,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 17.sp,
                             ),
                           ),
                           Text(

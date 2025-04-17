@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:mr_candy/core/errors/failure.dart';
 import 'package:mr_candy/core/utils/end_points.dart';
 import 'package:mr_candy/features/home/data/models/banner_model.dart';
@@ -8,8 +9,13 @@ import 'package:mr_candy/features/home/data/models/category_model.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 import 'package:mr_candy/features/home/data/repos/home_repo.dart';
 import 'package:http/http.dart' as http;
+import '../../../../main.dart';
 
 class HomeRepoImplementation implements HomeRepo {
+  String get currentLanguage =>
+      EasyLocalization.of(navigatorKey.currentContext!)?.locale.languageCode ??
+      "ar";
+
   @override
   Future<Either<Failure, List<BannerModel>>> getBanners() async {
     List<BannerModel> banners = [];
@@ -50,6 +56,9 @@ class HomeRepoImplementation implements HomeRepo {
     try {
       var response = await http.get(
         Uri.parse(EndPoints.baseUrl + EndPoints.categories),
+        headers: {
+          "lang": currentLanguage,
+        },
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {
@@ -85,6 +94,9 @@ class HomeRepoImplementation implements HomeRepo {
     try {
       var response = await http.get(
         Uri.parse(EndPoints.baseUrl + EndPoints.home),
+        headers: {
+          "lang": currentLanguage,
+        },
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {
@@ -115,6 +127,9 @@ class HomeRepoImplementation implements HomeRepo {
     try {
       var response = await http.get(
         Uri.parse("${EndPoints.baseUrl + EndPoints.categories}/$id"),
+        headers: {
+          "lang": currentLanguage,
+        },
       );
       var body = jsonDecode(response.body);
       if (body["status"]) {

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,10 +11,13 @@ class CustomSettingTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isArabic = context.locale.languageCode == "ar";
     return Padding(
-      padding: const EdgeInsets.only(left: 6, right: 6),
+      padding: isArabic
+          ? const EdgeInsets.only(left: 6, right: 17)
+          : const EdgeInsets.only(left: 17, right: 6),
       child: Align(
-        alignment: Alignment.centerRight,
+        alignment: isArabic ? Alignment.centerRight : Alignment.centerLeft,
         child: Text(
           title,
           softWrap: true,
