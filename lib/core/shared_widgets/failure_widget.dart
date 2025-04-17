@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 
 class FailureWidget extends StatelessWidget {
   const FailureWidget({super.key, required this.errorMessage, this.onPressed});
@@ -23,7 +23,7 @@ class FailureWidget extends StatelessWidget {
         ),
         MaterialButton(
           onPressed: onPressed,
-          child: const Text(AppTexts.retry),
+          child: Text("retry".tr()),
         ),
       ],
     );

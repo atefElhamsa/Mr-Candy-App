@@ -79,7 +79,8 @@ class CategoriesList extends StatelessWidget {
                                       MediaQuery.sizeOf(context).height * 0.1,
                                   errorWidget: (c, u, e) {
                                     return const Icon(
-                                        Icons.error_outline_rounded);
+                                      Icons.error_outline_rounded,
+                                    );
                                   },
                                   placeholder: (c, e) {
                                     return const Center(
@@ -90,13 +91,11 @@ class CategoriesList extends StatelessWidget {
                                 Text(
                                   e.name,
                                   style: GoogleFonts.almarai(
-                                    textStyle: TextStyle(
-                                      color: AppColors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize:
-                                          MediaQuery.sizeOf(context).height *
-                                              0.02,
-                                    ),
+                                    color: AppColors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize:
+                                        MediaQuery.sizeOf(context).height *
+                                            0.02,
                                   ),
                                 ),
                               ],

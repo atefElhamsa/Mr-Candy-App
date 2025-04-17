@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/features/carts/presentation/view/cart_screen.dart';
@@ -9,6 +10,10 @@ import 'package:mr_candy/features/favourite/presentation/views/favourite_screen.
 import 'package:mr_candy/features/home/presentation/views/home_main_screen.dart';
 import 'package:mr_candy/features/setting/presentation/view/setting_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+import '../controller/get_banners_cubit.dart';
+import '../controller/get_best_seller_product_cubit.dart';
+import '../controller/get_categories_cubit.dart';
 
 class HomeBottomScreen extends StatefulWidget {
   const HomeBottomScreen({super.key});
@@ -25,6 +30,14 @@ class _HomeBottomScreenState extends State<HomeBottomScreen> {
     const CartScreen(),
     const SettingScreen(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<BannersCubit>().getBanners();
+    context.read<CategoriesCubit>().getCategories();
+    context.read<BestSellerProductsCubit>().getBestSellerProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isArabic = context.locale.languageCode == "ar";

@@ -15,7 +15,6 @@ class HomeRepoImplementation implements HomeRepo {
   String get currentLanguage =>
       EasyLocalization.of(navigatorKey.currentContext!)?.locale.languageCode ??
       "ar";
-
   @override
   Future<Either<Failure, List<BannerModel>>> getBanners() async {
     List<BannerModel> banners = [];
@@ -121,8 +120,9 @@ class HomeRepoImplementation implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<ProductModel>>> getCategoryDetails(
-      {required int id}) async {
+  Future<Either<Failure, List<ProductModel>>> getCategoryDetails({
+    required int id,
+  }) async {
     List<ProductModel> categoryDetails = [];
     try {
       var response = await http.get(
