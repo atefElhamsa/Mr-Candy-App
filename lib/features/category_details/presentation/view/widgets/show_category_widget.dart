@@ -1,9 +1,10 @@
+import 'dart:ui' as ui;
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
-import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
 
 class ShowCategoryWidget extends StatefulWidget {
@@ -58,50 +59,52 @@ class _ShowCategoryWidgetState extends State<ShowCategoryWidget> {
               ),
             ),
             SizedBox(height: 20.h),
-            SizedBox(
-              height: 80.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                reverse: isArabic ? false : true,
-                itemCount: widget.productModel.images.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedImageIndex = index;
-                        pageController.jumpToPage(index);
-                      });
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                      child: Container(
-                        height: 80.h,
-                        width: 90.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(
-                            color: selectedImageIndex == index
-                                ? AppColors.loginAppbar3
-                                : AppColors.transparent,
-                            width: 2,
+            Directionality(
+              textDirection: isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+              child: SizedBox(
+                height: 80.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: widget.productModel.images.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedImageIndex = index;
+                          pageController.jumpToPage(index);
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Container(
+                          height: 80.h,
+                          width: 90.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            border: Border.all(
+                              color: selectedImageIndex == index
+                                  ? AppColors.loginAppbar3
+                                  : AppColors.transparent,
+                              width: 2,
+                            ),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.productModel.images[index],
+                            fit: BoxFit.fitHeight,
+                            placeholder: (c, e) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                            errorWidget: (c, u, e) {
+                              return const Icon(Icons.error_outline_rounded);
+                            },
                           ),
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.productModel.images[index],
-                          fit: BoxFit.fitHeight,
-                          placeholder: (c, e) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                          errorWidget: (c, u, e) {
-                            return const Icon(Icons.error_outline_rounded);
-                          },
-                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             SizedBox(height: 20.h),

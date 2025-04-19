@@ -10,7 +10,6 @@ import 'package:mr_candy/features/category_details/presentation/view/widgets/cat
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_cubit.dart';
 import 'package:mr_candy/features/home/presentation/controller/get_category_details_states.dart';
 
-
 class CategoryDetailsList extends StatefulWidget {
   const CategoryDetailsList({super.key, required this.id});
 
@@ -31,7 +30,6 @@ class _CategoryDetailsListState extends State<CategoryDetailsList> {
 
   @override
   Widget build(BuildContext context) {
-    bool isArabic = context.locale.languageCode == "ar";
     return BlocBuilder<CategoryDetailsCubit, CategoryDetailsStates>(
       builder: (context, state) {
         if (state is CategoryDetailsLoadingStates) {
