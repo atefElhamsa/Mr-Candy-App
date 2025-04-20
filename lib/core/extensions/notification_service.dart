@@ -1,35 +1,42 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class LocalNotificationService {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  Future<void> init() async {
-    AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings("@mipmap/ic_launcher");
-    InitializationSettings initializationSettings = InitializationSettings(
-      android: androidInitializationSettings,
+class NotificationService {
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  bool _isInitialized = false;
+  bool get isInitialized => _isInitialized;
+
+  Future<void> initNotification() async {
+    if (_isInitialized) return;
+    const initSettingsAndroid =
+        AndroidInitializationSettings("@mipmap/ic_launcher");
+    const initSettings = InitializationSettings(
+      android: initSettingsAndroid,
     );
-    flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse: (details) {},
-      onDidReceiveBackgroundNotificationResponse: (details) {},
-    );
+    await flutterLocalNotificationsPlugin.initialize(initSettings);
   }
 
-  Future<void> showNotification() async {
-    NotificationDetails notificationDetails = const NotificationDetails(
+  NotificationDetails notificationDetails() {
+    return const NotificationDetails(
       android: AndroidNotificationDetails(
-        "id 1",
-        "Basic Notification",
+        "Daily Id Channel",
+        "Daily Notification Channel",
+        channelDescription: "Daily Description Channel",
         importance: Importance.max,
         priority: Priority.high,
       ),
     );
-    flutterLocalNotificationsPlugin.show(
-      0,
-      'Basic Notification',
-      'body',
-      notificationDetails,
+  }
+
+  Future<void> showNotification({
+    int id = 0,
+    String? title,
+    String? body,
+  }) async {
+    return flutterLocalNotificationsPlugin.show(
+      id,
+      title,
+      body,
+      notificationDetails(),
     );
   }
 }

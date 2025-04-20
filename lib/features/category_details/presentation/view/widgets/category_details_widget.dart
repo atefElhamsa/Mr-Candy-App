@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mr_candy/core/extensions/notification_service.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/home/data/models/product_model.dart';
@@ -75,6 +76,11 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                         onPressed: () {
                           widget.productModel.inFavorites =
                               !widget.productModel.inFavorites;
+                          NotificationService().showNotification(
+                            title: widget.productModel.name,
+                            body: "addFav".tr(),
+                            id: widget.productModel.id,
+                          );
                           if (widget.productModel.inFavorites) {
                             BlocProvider.of<FavouriteCubit>(context)
                                 .addFavourite(
@@ -125,8 +131,15 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                   padding: EdgeInsets.only(left: 4.w, bottom: 12.h),
                   child: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<CartCubit>(context)
-                          .addCart(context, widget.index);
+                      NotificationService().showNotification(
+                        title: widget.productModel.name,
+                        body: "addToCart".tr(),
+                        id: widget.productModel.id,
+                      );
+                      BlocProvider.of<CartCubit>(context).addCart(
+                        context,
+                        widget.index,
+                      );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -178,11 +191,9 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                             maxLines: 1,
                             widget.productModel.price.toString(),
                             style: GoogleFonts.almarai(
-                              textStyle: TextStyle(
-                                color: AppColors.loginAppbar1,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17.sp,
-                              ),
+                              color: AppColors.loginAppbar1,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 17.sp,
                             ),
                           ),
                         ],

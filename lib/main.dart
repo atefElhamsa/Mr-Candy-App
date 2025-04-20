@@ -26,10 +26,8 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(AppTexts.nameOfBox);
   await ScreenUtil.ensureScreenSize();
-  WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
-  await LocalNotificationService().init();
+  NotificationService().initNotification();
   runApp(
     EasyLocalization(
       path: "assets/translation",
