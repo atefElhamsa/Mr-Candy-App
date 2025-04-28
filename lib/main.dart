@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mr_candy/core/extensions/api_keys.dart';
+import 'package:mr_candy/core/extensions/app_information_service.dart';
 import 'package:mr_candy/core/extensions/notification_service.dart';
 import 'package:mr_candy/core/utils/app_texts.dart';
 import 'package:mr_candy/features/carts/presentation/controller/cart_cubit.dart';
@@ -28,6 +29,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await EasyLocalization.ensureInitialized();
   NotificationService().initNotification();
+  AppInfoHelper().init();
   runApp(
     EasyLocalization(
       path: "assets/translation",

@@ -6,8 +6,11 @@ import 'package:mr_candy/features/payment/presentation/view/widgets/custom_butto
 import 'package:mr_candy/features/payment/presentation/view/widgets/payment_method.dart';
 
 class PaymentMethodBottomSheet extends StatefulWidget {
-  const PaymentMethodBottomSheet(
-      {super.key, required this.isLoading, required this.totalPrice});
+  const PaymentMethodBottomSheet({
+    super.key,
+    required this.isLoading,
+    required this.totalPrice,
+  });
   final bool isLoading;
   final num totalPrice;
 

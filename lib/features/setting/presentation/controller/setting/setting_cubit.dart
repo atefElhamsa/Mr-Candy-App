@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mr_candy/features/setting/presentation/controller/setting/setting_state.dart';
-
+import 'package:mr_candy/features/setting/presentation/view/setting_privacy_screen.dart';
 import '../../../../change_password/presentation/view/change_password_screen.dart';
 import '../../../../profile/presentation/view/profile_page.dart';
 import '../../../data/model/setting_item_model.dart';
@@ -40,7 +40,14 @@ class SettingCubit extends Cubit<SettingStates> {
       SettingItemModel(
         title: "homeSettingPrivacy",
         leadingIcon: Icons.privacy_tip_outlined,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SettingPrivacyScreen(),
+            ),
+          );
+        },
       ),
     ];
 
