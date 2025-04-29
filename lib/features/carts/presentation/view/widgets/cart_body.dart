@@ -100,9 +100,9 @@ class _CartBodyState extends State<CartBody> {
                                           : Alignment.topLeft,
                                       child: GestureDetector(
                                         onTap: () {
-                                          NotificationService().showNotification(
-                                            title: cartItems[index].productModel.name,
+                                          NotificationService().saveNotifications(
                                             body: "delFromCart".tr(),
+                                            title: cartItems[index].productModel.name,
                                             id: cartItems[index].id,
                                           );
                                           BlocProvider.of<CartCubit>(context)

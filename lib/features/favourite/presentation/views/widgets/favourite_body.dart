@@ -10,7 +10,6 @@ import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_states.dart';
-
 import '../../../../../core/utils/app_colors.dart';
 
 class FavouriteBody extends StatefulWidget {
@@ -96,11 +95,11 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                                     .productModel
                                                     .inFavorites;
                                             NotificationService()
-                                                .showNotification(
+                                                .saveNotifications(
+                                              body: "delFav".tr(),
                                               title: favouriteList[index]
                                                   .productModel
                                                   .name,
-                                              body: "delFav".tr(),
                                               id: favouriteList[index].id,
                                             );
                                             BlocProvider.of<FavouriteCubit>(
@@ -158,7 +157,8 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                       MediaQuery.sizeOf(context).height * 0.1,
                                   errorWidget: (c, u, e) {
                                     return const Icon(
-                                        Icons.error_outline_rounded);
+                                      Icons.error_outline_rounded,
+                                    );
                                   },
                                   placeholder: (c, e) {
                                     return const Center(

@@ -76,9 +76,9 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                         onPressed: () {
                           widget.productModel.inFavorites =
                               !widget.productModel.inFavorites;
-                          NotificationService().showNotification(
-                            title: widget.productModel.name,
+                          NotificationService().saveNotifications(
                             body: "addFav".tr(),
+                            title: widget.productModel.name,
                             id: widget.productModel.id,
                           );
                           if (widget.productModel.inFavorites) {
@@ -131,9 +131,9 @@ class _CategoryDetailsWidgetState extends State<CategoryDetailsWidget> {
                   padding: EdgeInsets.only(left: 4.w, bottom: 12.h),
                   child: GestureDetector(
                     onTap: () {
-                      NotificationService().showNotification(
-                        title: widget.productModel.name,
+                      NotificationService().saveNotifications(
                         body: "addToCart".tr(),
+                        title: widget.productModel.name,
                         id: widget.productModel.id,
                       );
                       BlocProvider.of<CartCubit>(context).addCart(

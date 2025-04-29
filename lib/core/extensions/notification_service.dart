@@ -1,6 +1,10 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationService {
+  static final NotificationService _instance = NotificationService._internal();
+  factory NotificationService() => _instance;
+  NotificationService._internal();
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   bool _isInitialized = false;
   bool get isInitialized => _isInitialized;
@@ -38,5 +42,35 @@ class NotificationService {
       body,
       notificationDetails(),
     );
+  }
+
+  Future<void> saveNotifications({
+    String? title,
+    String? body,
+    int id = 0,
+  }) async {
+    showNotification(
+      title: title,
+      body: body,
+      id: id,
+    );
+    final prefs = await SharedPreferences.getInstance();
+    final notifications = prefs.getStringList('notifications') ?? [];
+    final notificationData = '$title|$body|$id';
+    notifications.add(notificationData);
+    await prefs.setStringList('notifications', notifications);
+  }
+
+  Future<List<Map<String, String>>> getSavedNotifications() async {
+    final prefs = await SharedPreferences.getInstance();
+    final notifications = prefs.getStringList('notifications') ?? [];
+    return notifications.map((item) {
+      final parts = item.split('|');
+      return {
+        'title': parts[0],
+        'body': parts[1],
+        'id': parts[2],
+      };
+    }).toList();
   }
 }
