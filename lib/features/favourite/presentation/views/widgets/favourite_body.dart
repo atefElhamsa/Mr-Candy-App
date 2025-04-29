@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mr_candy/core/extensions/notification_service.dart';
+import 'package:mr_candy/core/shared_widgets/custom_awesome_dialog.dart';
 import 'package:mr_candy/core/shared_widgets/failure_widget.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
 import 'package:mr_candy/features/favourite/presentation/controller/favourite_cubit.dart';
@@ -94,21 +95,29 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                                 !favouriteList[index]
                                                     .productModel
                                                     .inFavorites;
-                                            NotificationService()
-                                                .saveNotifications(
-                                              body: "delFav".tr(),
-                                              title: favouriteList[index]
-                                                  .productModel
-                                                  .name,
-                                              id: favouriteList[index].id,
-                                            );
-                                            BlocProvider.of<FavouriteCubit>(
-                                                    context)
-                                                .deleteFavourite(
+                                            CustomAwesomeDialog()
+                                                .showCustomDialog(
                                               context: context,
-                                              index: index,
+                                              title: "delete",
+                                              desc: "sureDeleteOneProduct",
+                                              btnOkOnPress: () {
+                                                NotificationService()
+                                                    .saveNotifications(
+                                                  body: "delFav".tr(),
+                                                  title: favouriteList[index]
+                                                      .productModel
+                                                      .name,
+                                                  id: favouriteList[index].id,
+                                                );
+                                                BlocProvider.of<FavouriteCubit>(
+                                                        context)
+                                                    .deleteFavourite(
+                                                  context: context,
+                                                  index: index,
+                                                );
+                                                setState(() {});
+                                              },
                                             );
-                                            setState(() {});
                                           },
                                           icon: Icon(
                                             favouriteList[index]

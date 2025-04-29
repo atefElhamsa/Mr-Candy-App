@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mr_candy/core/extensions/notification_service.dart';
+import 'package:mr_candy/core/shared_widgets/custom_awesome_dialog.dart';
 import 'package:mr_candy/core/shared_widgets/custom_button.dart';
 import 'package:mr_candy/core/utils/app_colors.dart';
 import 'package:mr_candy/core/utils/app_images.dart';
@@ -100,13 +101,25 @@ class _CartBodyState extends State<CartBody> {
                                           : Alignment.topLeft,
                                       child: GestureDetector(
                                         onTap: () {
-                                          NotificationService().saveNotifications(
-                                            body: "delFromCart".tr(),
-                                            title: cartItems[index].productModel.name,
-                                            id: cartItems[index].id,
+                                          CustomAwesomeDialog()
+                                              .showCustomDialog(
+                                            context: context,
+                                            title: "delete",
+                                            desc: "sureDeleteOneProduct",
+                                            btnOkOnPress: () {
+                                              NotificationService()
+                                                  .saveNotifications(
+                                                body: "delFromCart".tr(),
+                                                title: cartItems[index]
+                                                    .productModel
+                                                    .name,
+                                                id: cartItems[index].id,
+                                              );
+                                              BlocProvider.of<CartCubit>(
+                                                      context)
+                                                  .deleteCart(context, index);
+                                            },
                                           );
-                                          BlocProvider.of<CartCubit>(context)
-                                              .deleteCart(context, index);
                                         },
                                         child: Container(
                                           height: 40.h,

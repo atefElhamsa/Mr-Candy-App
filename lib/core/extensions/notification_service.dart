@@ -61,6 +61,20 @@ class NotificationService {
     await prefs.setStringList('notifications', notifications);
   }
 
+  Future<void> deleteNotifications({required int index}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final notifications = prefs.getStringList('notifications') ?? [];
+    if (index >= 0 && index < notifications.length) {
+      notifications.removeAt(index);
+      await prefs.setStringList('notifications', notifications);
+    }
+  }
+
+  Future<void> deleteAllNotifications() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('notifications');
+  }
+
   Future<List<Map<String, String>>> getSavedNotifications() async {
     final prefs = await SharedPreferences.getInstance();
     final notifications = prefs.getStringList('notifications') ?? [];
